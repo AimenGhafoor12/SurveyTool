@@ -1,0 +1,42 @@
+﻿@model UserManagement.Models.Response
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Response</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.questionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.questionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.optionId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.optionId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responder.responder1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responder.responder1)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.responseId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

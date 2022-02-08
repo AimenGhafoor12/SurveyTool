@@ -1,0 +1,59 @@
+﻿@model UserManagement.Models.Survey
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PollsterLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Survey</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.surveyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.surveyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.startData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.startData)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SurveyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

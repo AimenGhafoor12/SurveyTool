@@ -1,0 +1,120 @@
+﻿@model UserManagement.Models.User
+
+@{
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login V16</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <link rel="icon" type="image/png" href="~/LoginAssets/images/icons/favicon.ico" />
+
+    <link href="~/LoginAssets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/vendor/animate/animate.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/vendor/animsition/css/animsition.min.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/vendor/select2/select2.min.css" rel="stylesheet" />
+
+
+    <link href="~/LoginAssets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+    <link href="~/LoginAssets/css/main.css" rel="stylesheet" />
+    <link href="~/LoginAssets/css/util.css" rel="stylesheet" />
+
+
+
+</head>
+<body>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="limiter">
+
+        <div class="container-login100" style="background-image: url('../../Images/pic.jpg');">
+            <div class="wrap-login100 p-t-30 p-b-50">
+                <span class="login100-form-title p-b-41">
+                    Account Login
+                </span>
+                @*<div class="login-logo">
+                        <a><img src="~/Images/logooooo1.png" alt="Logo" /></a>
+                    </div>*@
+                <form action="" method="post" class="login100-form validate-form p-b-33 p-t-5">
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input class="input100" type="email" name="username" placeholder="email">
+                        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" type="password" name="Confirmpassword" placeholder="Confirm Password">
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
+                    @*<div class="form-group">*@
+                        @*  <input  type="hidden" name="Pollster" value="Pollster" >*@
+                        @Html.TextBoxFor(m => m.type, new { @Value = "Pollster", @style = "color:white" })
+                    @*</div>*@
+                    <div class="container-login100-form-btn m-t-32">
+                        <button class="login100-form-btn" type="submit">
+                            Login
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dropDownSelect1"></div>
+}
+
+
+
+    <script src="~/LoginAssets/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+    <script src="~/LoginAssets/vendor/animsition/js/animsition.min.js"></script>
+
+    <script src="~/LoginAssets/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/LoginAssets/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/LoginAssets/vendor/select2/select2.min.js"></script>
+
+    <script src="~/LoginAssets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/LoginAssets/vendor/daterangepicker/daterangepicker.js"></script>
+
+    <script src="~/LoginAssets/vendor/countdowntime/countdowntime.js"></script>
+
+    <script src="~/LoginAssets/js/main.js"></script>
+
+
+</body>
+</html>
+
+
+

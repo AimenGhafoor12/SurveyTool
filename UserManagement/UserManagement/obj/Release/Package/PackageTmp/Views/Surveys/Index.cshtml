@@ -1,0 +1,195 @@
+﻿@model IEnumerable<UserManagement.Models.Survey>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PollsterLayout.cshtml";
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<style>
+    body {
+        background-color: #eee;
+    }
+
+    table th, table td {
+        text-align: center;
+    }
+
+
+
+
+
+    .pagination {
+        margin: 0;
+    }
+
+        .pagination li:hover {
+            cursor: pointer;
+        }
+
+    .header_wrap {
+        padding: 30px 0;
+    }
+
+    .num_rows {
+        width: 20%;
+        float: left;
+    }
+    .tb_search {
+        width: 20%;
+        float: left;
+    }
+
+    .pagination-container {
+        width: 70%;
+        float: left;
+    }
+
+    .rows_count {
+        width: 20%;
+        float: right;
+        text-align: right;
+        color: #999;
+    }
+</style>
+<style>
+    html, body {
+        font-family: cursive;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+</style>
+
+<style>
+    a.my-class {
+        color: #333333
+    }
+
+        a.my-class:active {
+            color: #666666
+        }
+
+        a.my-class:link {
+            color: #999999
+        }
+</style>
+<br />
+<h3 style="color:black">My Surveys </h3>
+
+<br />
+<div class="row">
+    <div>
+        <p>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <button type="submit" class="btn btn--radius-2 btn--blue" style="background-color:aliceblue;">@Html.ActionLink("Create New", "Create", new { area = "" }, new { @style = "color:mediumblue" })</button>
+
+        </p>
+    </div>
+    &nbsp; &nbsp;
+    <div class="tb_search">
+        <input type="text" id="myInput" onkeyup="FilterkeyWord_all_table()" placeholder="Search.." class="form-control">
+
+    </div>
+</div>
+
+<div class="row" style="margin-left:12px">
+    <div class="col-lg-11">
+
+        <div class="table table-hover">
+            <table class="table" id="myTable">
+
+                <tr class="table-secondary">
+                    <th>
+                        Survey Name
+                    </th>
+
+                    <th>
+                        Start Date
+                    </th>
+                    <th>
+                        End Date
+                    </th>
+
+                    <th>
+                        Actions
+                    </th>
+                    @*<th>
+                            User Name
+                        </th>*@
+                    <th></th>
+                </tr>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.surveyName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.startData)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.endDate)
+                            </td>
+
+                            <td>
+
+                                <i class="fa fa-pencil" style="color:blue">  </i>&nbsp; @Html.ActionLink("DesignSurvey", "DesignSurvey", new { id = item.SurveyId }) |
+                                <i class="fa fa-edit" style="color:lightseagreen">  </i>&nbsp; @Html.ActionLink("Edit", "Edit", new { id = item.SurveyId }) |
+                                <i class="fa fa-info-circle" style="color:green">  </i>&nbsp; @Html.ActionLink("Details", "Details", new { id = item.SurveyId }) |
+                                <i class="fa fa-trash" style="color:red"> </i>&nbsp; @Html.ActionLink("Delete", "Delete", new { id = item.SurveyId }) |
+                                <i class="fa fa-share-alt" style="color:orange"> </i>&nbsp; @Html.ActionLink("Share", "ShareLink", new { id = item.SurveyId }) |
+                                <i class="fa fa-area-chart" style="color:deeppink"> </i>&nbsp; @Html.ActionLink("Reports", "generateReport", new { id = item.SurveyId })
+
+
+                                @*@Html.ActionLink("DesignSurvey", "DesignSurvey", new { id = item.SurveyId }) |
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.SurveyId }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.SurveyId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.SurveyId })*@
+
+                            </td>
+                        </tr>
+
+
+                    }
+                </tbody>
+
+
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+            if (($('#myInput') == "@@") || ($('#myInput').val == "!!") || ($('#myInput').val == "")) {
+                alert("Did not match any documents.  Make sure that all words are spelled correctly.");
+               
+            }
+            if (($('#myInput').length == 0)) {
+               alert("Record does not exist");
+            }
+            if (($('#myInput').length >=25)) {
+                alert("Record does not exist");
+            }
+        });
+    });
+</script>
+
+
+
+

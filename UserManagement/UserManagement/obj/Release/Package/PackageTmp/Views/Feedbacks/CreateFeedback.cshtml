@@ -1,0 +1,202 @@
+﻿@model UserManagement.Models.Feedback
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_PollsterLayout.cshtml";
+}
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+    <!-- Icons font CSS-->
+    <link href="~/createSurvey/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="~/createSurvey/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Vendor CSS-->
+    <link href="~/createSurvey/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/createSurvey/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <!-- Main CSS-->
+    <link href="~/createSurvey/css/main.css" rel="stylesheet" media="all">
+</head>
+
+
+
+
+
+<style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: cursive;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+</style>
+
+
+
+<style>
+
+
+
+
+    .star-rating {
+        direction: rtl;
+        display: inline-block;
+        padding: 30px;
+    }
+
+        .star-rating input[type=radio] {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #bbb;
+            font-size: 40px;
+            padding: 0;
+            cursor: pointer;
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+            .star-rating label:hover,
+            .star-rating label:hover ~ label,
+            .star-rating input[type=radio]:checked ~ label {
+                color: #f2b600;
+            }
+
+    .div {
+        height: 100px;
+        width: 500px;
+        background-color: hotpink;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <html>
+
+
+    <body style="color:hotpink">
+        <div class="wrapper wrapper--w680" style="color:#a93ee8">
+            <div class="card card-4">
+                <div class="card-body" style="color:rgba(255,257,153,0.75)">
+                    <h2 class="title" style="color:blue ; font-weight:bold">Give Your Feedback </h2>
+                    <form method="POST">
+                        <div class="row row-space">
+                            <div class="col-8">
+                                @*<div class="input-group">
+                                    <label class="label">Survey Name</label>
+                                    <input class="input--style-4" type="text" name="feedbackString">
+
+                                </div>*@
+                                <div class="form-group purple-border center" id="textarea">
+
+                                    <textarea class="form-control" id="textarea-char-counter" rows="3" name="feedbackString" placeholder="Enter feedback"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                @*<div class="input-group">
+                                    <label class="label">Description</label>
+                                    <input class="input--style-4" type="text" name="Description">
+                                </div>*@
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            @*<div class="col-5">
+                                <div class="input-group">
+                                    <label class="label">Start Date</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="startData">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                            <div class="col-8">
+                               
+
+
+                                <div class="container" style="text-align: center" id="star">
+                                    <div class="star-rating" style="display: inline-block">
+                                        <input id="star-1" type="radio" name="rating" placeholder="option" value="1">
+                                        <label for="star-1" title="5 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-2" type="radio" name="rating" placeholder="option" value="2">
+                                        <label for="star-2" title="4 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-3" type="radio" name="rating" placeholder="option" value="3">
+                                        <label for="star-3" title="3 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-4" type="radio" name="rating" placeholder="option" value="4">
+                                        <label for="star-4" title="2 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-5" type="radio" name="rating" placeholder="option" value="5">
+                                        <label for="star-5" title="1 star">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-t-15 container" id="popup" style="align-content:center">
+                            <button id="btnpopup" onclick="myFunction()" class="btn btn--radius-2 btn--blue" type="submit">Create</button>
+
+                        </div>
+
+
+
+                        @*<div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">@Html.ActionLink("Back to List", "Index")</button>
+                        </div>*@
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+        
+    
+
+
+
+
+}
+
+
+<script>
+
+function myFunction() {
+  alert("Feedback is submitted successfully!");
+}
+</script>
+
+<!-- Jquery JS-->
+<script src="~/createSurvey/vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="~/createSurvey/vendor/select2/select2.min.js"></script>
+
+<script src="~/createSurvey/vendor/datepicker/moment.min.js"></script>
+<script src="~/createSurvey/vendor/datepicker/daterangepicker.js"></script>
+<!-- Main JS-->
+<script src="~/createSurvey/js/global.js"></script>
+
+<!-- This templates was made by Colorlib (https://colorlib.com) -->

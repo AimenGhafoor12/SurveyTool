@@ -1,0 +1,50 @@
+﻿@model UserManagement.Models.Feedback
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Feedback</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.feedbackString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.feedbackString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responder.responder1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responder.responder1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.feedbackId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

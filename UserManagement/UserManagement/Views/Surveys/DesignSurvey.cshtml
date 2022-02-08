@@ -1,0 +1,2540 @@
+﻿@model UserManagement.Models.Survey
+
+@{
+    ViewBag.Title = "DesignSurvey";
+    Layout = "~/Views/Shared/_PollsterLayout.cshtml";
+
+}
+
+
+
+<style>
+    html, body {
+        font-family: cursive;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+</style>
+<style>
+    /* The container */
+    .containers {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default checkbox */
+        .containers input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* Create a custom checkbox */
+    .checkmarks {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containers:hover input ~ .checkmarks {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .containers input:checked ~ .checkmarks {
+        background-color: #2196F3;
+    }
+
+
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmarks:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .containers input:checked ~ .checkmarks:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .containers .checkmarks:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
+<style>
+    /* The container */
+    .containerd {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default radio button */
+        .containerd input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containerd:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .containerd input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .containerd input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .containerd .checkmark:after {
+        top: 8px;
+        left: 8px;
+        width: 7px;
+        height: 7px;
+        border-radius: 20%;
+        background: white;
+    }
+</style>
+
+
+<style>
+    input[type=checkbox] + label {
+        display: block;
+        margin: 0.2em;
+        cursor: pointer;
+        padding: 0.2em;
+    }
+
+    input[type=checkbox] {
+        display: none;
+    }
+
+        input[type=checkbox] + label:before {
+            content: "\2714";
+            border: 0.1em solid #000;
+            border-radius: 0.2em;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            padding-left: 0.2em;
+            padding-bottom: 0.3em;
+            margin-right: 0.2em;
+            vertical-align: bottom;
+            color: transparent;
+            transition: .2s;
+        }
+
+        input[type=checkbox] + label:active:before {
+            transform: scale(0);
+        }
+
+        input[type=checkbox]:checked + label:before {
+            background-color: MediumSeaGreen;
+            border-color: MediumSeaGreen;
+            color: #fff;
+        }
+
+        input[type=checkbox]:disabled + label:before {
+            transform: scale(1);
+            border-color: #aaa;
+        }
+
+        input[type=checkbox]:checked:disabled + label:before {
+            transform: scale(1);
+            background-color: #bfb;
+            border-color: #bfb;
+        }
+</style>
+
+<style>
+    .field-icon {
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .container {
+        padding-top: 50px;
+        margin: auto;
+    }
+</style>
+
+
+
+
+<style>
+    body {
+        background-color: #666;
+        margin: 100px 50px;
+    }
+
+    [slider] {
+        position: relative;
+        height: 14px;
+        border-radius: 10px;
+        text-align: left;
+        margin: 45px 0 10px 0;
+    }
+
+        [slider] > div {
+            position: absolute;
+            left: 13px;
+            right: 15px;
+            height: 14px;
+        }
+
+            [slider] > div > [inverse-left] {
+                position: absolute;
+                left: 0;
+                height: 14px;
+                border-radius: 10px;
+                background-color: #CCC;
+                margin: 0 7px;
+            }
+
+            [slider] > div > [inverse-right] {
+                position: absolute;
+                right: 0;
+                height: 14px;
+                border-radius: 10px;
+                background-color: #CCC;
+                margin: 0 7px;
+            }
+
+            [slider] > div > [range] {
+                position: absolute;
+                left: 0;
+                height: 14px;
+                border-radius: 14px;
+                background-color: #1ABC9C;
+            }
+
+            [slider] > div > [thumb] {
+                position: absolute;
+                top: -7px;
+                z-index: 2;
+                height: 28px;
+                width: 28px;
+                text-align: left;
+                margin-left: -11px;
+                cursor: pointer;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+                background-color: #FFF;
+                border-radius: 50%;
+                outline: none;
+            }
+
+        [slider] > input[type=range] {
+            position: absolute;
+            pointer-events: none;
+            -webkit-appearance: none;
+            z-index: 3;
+            height: 14px;
+            top: -2px;
+            width: 100%;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            -moz-opacity: 0;
+            -khtml-opacity: 0;
+            opacity: 0;
+        }
+
+    div[slider] > input[type=range]::-ms-track {
+        -webkit-appearance: none;
+        background: transparent;
+        color: transparent;
+    }
+
+    div[slider] > input[type=range]::-moz-range-track {
+        -moz-appearance: none;
+        background: transparent;
+        color: transparent;
+    }
+
+    div[slider] > input[type=range]:focus::-webkit-slider-runnable-track {
+        background: transparent;
+        border: transparent;
+    }
+
+    div[slider] > input[type=range]:focus {
+        outline: none;
+    }
+
+    div[slider] > input[type=range]::-ms-thumb {
+        pointer-events: all;
+        width: 28px;
+        height: 28px;
+        border-radius: 0px;
+        border: 0 none;
+        background: red;
+    }
+
+    div[slider] > input[type=range]::-moz-range-thumb {
+        pointer-events: all;
+        width: 28px;
+        height: 28px;
+        border-radius: 0px;
+        border: 0 none;
+        background: red;
+    }
+
+    div[slider] > input[type=range]::-webkit-slider-thumb {
+        pointer-events: all;
+        width: 28px;
+        height: 28px;
+        border-radius: 0px;
+        border: 0 none;
+        background: red;
+        -webkit-appearance: none;
+    }
+
+    div[slider] > input[type=range]::-ms-fill-lower {
+        background: transparent;
+        border: 0 none;
+    }
+
+    div[slider] > input[type=range]::-ms-fill-upper {
+        background: transparent;
+        border: 0 none;
+    }
+
+    div[slider] > input[type=range]::-ms-tooltip {
+        display: none;
+    }
+
+    [slider] > div > [sign] {
+        opacity: 0;
+        position: absolute;
+        margin-left: -11px;
+        top: -39px;
+        z-index: 3;
+        background-color: #1ABC9C;
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 28px;
+        -webkit-border-radius: 28px;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+        [slider] > div > [sign]:after {
+            position: absolute;
+            content: '';
+            left: 0;
+            border-radius: 16px;
+            top: 19px;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top-width: 16px;
+            border-top-style: solid;
+            border-top-color: #1ABC9C;
+        }
+
+        [slider] > div > [sign] > span {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 28px;
+        }
+
+    [slider]:hover > div > [sign] {
+        opacity: 1;
+    }
+</style>
+
+
+
+
+
+
+<style>
+    body {
+        padding: 50px;
+    }
+
+    input {
+        font-size: 20px;
+        width: 50%;
+        padding: 15px;
+        text-align: left;
+        border: 5px solid rgba(0, 0, 0, .3);
+    }
+
+    .message {
+        font: 20px Helvetica, Arial, Sans-serif;
+        display: none;
+        width: 10%;
+        padding: 10px;
+        color: #fff;
+    }
+
+    .error {
+        background: red;
+    }
+
+    .success {
+        background: green;
+    }
+</style>
+
+
+
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+</style>
+
+<style>
+    body {
+        background: #f5f5f5;
+    }
+
+    .rating-area {
+        width: 200px;
+        padding: 60px 0 60px 0;
+        background: #ffffff;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .align-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .transition-fast {
+        transition: 0.2s ease-out;
+    }
+
+    .thumbs-up-circle {
+        width: 50px;
+        height: 50px;
+        background: #eeeeee;
+        border-radius: 50%;
+        box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+        cursor: pointer;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .thumbs-up {
+        color: #2196f3;
+        font-size: 24px;
+        transform: rotate(0) translate(0);
+    }
+
+    .thumbs-up-circle:hover {
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+        .thumbs-up-circle:hover .thumbs-up {
+            color: #1976D2;
+            transform: rotate(-5deg) translate(0px, -1px);
+        }
+
+    .thumbs-up-circle:active {
+        background: #e0e0e0;
+        box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+    }
+
+        .thumbs-up-circle:active .thumbs-up {
+            color: #065bae;
+            transition: 0.1s;
+            transform: rotate(-10deg) translate(0px, -2px);
+        }
+
+    .thumbs-down {
+        color: #c13b2a;
+        font-size: 24px;
+        transform: rotate(0) translate(0);
+    }
+
+    .thumbs-up-circle:hover .thumbs-down {
+        color: #565656;
+        transform: rotate(5deg) translate(0px, 1px);
+    }
+
+    .thumbs-up-circle:active .thumbs-down {
+        color: #424242;
+        transition: 0.1s;
+        transform: rotate(10deg) translate(0px, 2px);
+    }
+</style>
+
+
+
+
+
+
+
+
+<style>
+    .centerd {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+</style>
+<style>
+    .center {
+        disp = 70%;
+    }
+
+    .purple-border textarea {
+        border: 1px solid #ba68c8;
+    }
+
+    .purple-border .form-control:focus {
+        border: 1px solid #ba68c8;
+        box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+    }
+
+    .green-border-focus .form-control:focus {
+        border: 1px solid #8bc34a;
+        box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+    }
+</style>
+
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #eeeeee;
+    }
+
+    .file-upload {
+        background-color: #ffffff;
+        width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .file-upload-btn {
+        width: 100%;
+        margin: 0;
+        color: #fff;
+        background: #1FB264;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #15824B;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+        .file-upload-btn:hover {
+            background: #1AA059;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-btn:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+
+    .file-upload-content {
+        display: none;
+        text-align: center;
+    }
+
+    .file-upload-input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .image-upload-wrap {
+        margin-top: 20px;
+        border: 4px dashed #1FB264;
+        position: relative;
+    }
+
+        .image-dropping,
+        .image-upload-wrap:hover {
+            background-color: #1FB264;
+            border: 4px dashed #ffffff;
+        }
+
+    .image-title-wrap {
+        padding: 0 15px 15px 15px;
+        color: #222;
+    }
+
+    .drag-text {
+        text-align: center;
+    }
+
+        .drag-text h3 {
+            font-weight: 100;
+            text-transform: uppercase;
+            color: #15824B;
+            padding: 60px 0;
+        }
+
+    .file-upload-image {
+        max-height: 200px;
+        max-width: 200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .remove-image {
+        width: 200px;
+        margin: 0;
+        color: #fff;
+        background: #cd4535;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #b02818;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+        .remove-image:hover {
+            background: #c13b2a;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .remove-image:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+</style>
+
+
+<style>
+    .centerd {
+        padding: 20px;
+    }
+</style>
+
+
+
+
+
+
+<style>
+    .star-rating {
+        direction: rtl;
+        display: inline-block;
+        padding: 30px;
+    }
+
+        .star-rating input[type=radio] {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #bbb;
+            font-size: 40px;
+            padding: 0;
+            cursor: pointer;
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+            .star-rating label:hover,
+            .star-rating label:hover ~ label,
+            .star-rating input[type=radio]:checked ~ label {
+                color: #f2b600;
+            }
+
+    .div {
+        height: 100px;
+        width: 500px;
+        background-color: powderblue;
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+    .dropdown a:hover {
+        background-color: #ddd;
+    }
+
+    .show {
+        display: block;
+    }
+
+
+
+    table.striped-columns tbody td:nth-of-type(even),
+    table.striped-columns th:nth-of-type(even) {
+        background: rgb(235, 227, 209);
+    }
+
+    table.border {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+        table.border td,
+        table.border th {
+            border: 1px solid grey;
+            padding: 3px;
+        }
+
+    html, body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrap {
+        font: 12px Arial, san-serif;
+    }
+
+    h1.likert-header {
+        padding-left: 4.25%;
+        margin: 20px 0 0;
+    }
+
+    form .statement {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 30px 0 0 4.25%;
+        margin-bottom: 10px;
+    }
+
+    form .likert {
+        list-style: none;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 35px;
+        display: block;
+        border-bottom: 2px solid #efefef;
+    }
+
+        form .likert:last-of-type {
+            border-bottom: 0;
+        }
+
+        form .likert:before {
+            content: '';
+            position: relative;
+            top: 11px;
+            left: 9.5%;
+            display: block;
+            background-color: #efefef;
+            height: 4px;
+            width: 78%;
+        }
+
+        form .likert li {
+            display: inline-block;
+            width: 19%;
+            text-align: center;
+            vertical-align: top;
+        }
+
+            form .likert li input[type=radio] {
+                display: block;
+                position: relative;
+                top: 0;
+                left: 50%;
+                margin-left: -6px;
+            }
+
+            form .likert li label {
+                width: 100%;
+            }
+
+    form .buttons {
+        margin: 30px 0;
+        padding: 0 4.25%;
+        text-align: right;
+    }
+
+        form .buttons button {
+            padding: 5px 10px;
+            background-color: #67ab49;
+            border: 0;
+            border-radius: 3px;
+        }
+
+        form .buttons .clear {
+            background-color: #e9e9e9;
+        }
+
+        form .buttons .submit {
+            background-color: #67ab49;
+        }
+
+        form .buttons .clear:hover {
+            background-color: #ccc;
+        }
+
+        form .buttons .submit:hover {
+            background-color: #14892c;
+        }
+</style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<html>
+<body>
+    <style>
+        html, body {
+            font-family: cursive;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+        table td, .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid #dee2e6;
+            column-rule-color: white;
+            border-color: white;
+        }
+        table td, .table th {
+            padding: .75rem;
+            vertical-align: top;
+            border-top: 1px solid white;
+            border-color: white;
+        }
+
+        table {
+            border-color: white;
+        }
+    </style>
+    
+
+    <div class="content mt-3">
+        <div class="breadcrumbs">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1 style="font-size:17px; color:dodgerblue; font-weight:bold">Design your Survey here</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">@Html.ActionLink("Dashboard", "PollsterIndex", "Home")</a></li>
+                            <li><a href="#">@Html.ActionLink("Create Survey", "Create", "Surveys")</a></li>
+                            <li><a href="#">@Html.ActionLink("All Surveys", "Index", "Surveys")</a></li>
+                            <li class="active">@Html.ActionLink("Design Survey", "DesignSurvey", "Surveys", new {@class="active" } )</li>
+                          
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Survey Title:</strong>&nbsp;&nbsp;@Html.Raw(ViewBag.SurveyName)
+                        <br /><strong>Add Questions</strong>
+                    </div>
+                    <div class="card-body card-block">
+                        <form class="form-horizontal" method="post" action="../CreateQuestion">
+
+                            <div class="row form-group">
+                                <div class="col col-md-12">
+                                    <div class="input-group">
+                                        @*input2-group3*@
+                                        <input type="hidden" name="surveyid" value="@Html.Raw(ViewBag.surveyid)" />
+                                        <input type="text" id="input2-group3" name="question_Title" placeholder="Enter Question" class="form-control">
+                                        <div class="input-group-btn">
+
+
+                                            <div class="dropdown" id="slide1">
+
+                                                <button onclick="myFunction(); return false;" class="dropbtn">Type of Questions</button>
+                                                <div id="myDropdown" class="dropdown-content">
+
+                                                    <select id="ddl" name="questionType">
+                                                        <option value="select">Select</option>
+
+                                                        <option value="dropdown1">Dropdown</option>
+                                                        <option value="chkbox">Checkboxes</option>
+
+                                                        <option value="likert">likert</option>
+                                                        @*<option value="range">Slider Range</option>*@
+                                                        <option value="star">Star Rating</option>
+                                                        <option value="textarea">Open ended</option>
+                                                        <option value="smileys">Emoji Slider</option>
+                                                        <option value="myRadio">Radio Button</option>
+                                                        <option value="filechk">Upload File</option>
+                                                        <option value="datepicker">Date Picker</option>
+                                                        <option value="thumb">Thumb Rating</option>
+                                                        <option value="email">Input Email</option>
+                                                        <option value="slider-distance">Slider</option>
+                                                        <option value="password">Email Password</option>
+                                                        <option value="textquestion">Text Question</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*Text Question*@
+                            <div id="textquestion" class="form-group">
+                                <input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" />
+                                </div>
+
+
+                                @*Radio Button*@
+                                <div id="choice" class="container">
+                                    <div class="form-group">
+                                        <div name="add_name" id="add_field2">
+                                            <div class="table-responsive">
+                                                <table class="striped-columns border table table-bordered" id="dynamic_field3">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th><input type="text" placeholder="Enter option" id="txt1" class="form-control name_list" /></th>
+
+                                                            <th><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></th>
+                                                            <th><button type="button" name="addtext" id="addtext2" class="btn btn-success">+</button></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+
+                                                            <td>
+                                                                <input type="text" id="input2-group3" name="optionString" placeholder="Enter option" class="form-control name_list">
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" id="input2-group3" name="optionString" placeholder="Enter option" class="form-control name_list">
+
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" name="addtext" id="addtext2" class="btn btn-success">+</button>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+
+
+                                                        </tr>
+
+
+
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Likert scale*@
+                                <input type="radio" name="optionString" placeholder="option" value="default" checked="checked" style="display:none">
+
+                                <div class="wrap" id="likert">
+
+                                    <ul class='likert'>
+                                        <li>
+
+                                            <input type="text" name="optionString" placeholder="option" class="form-control name_list" id="input2-group3">
+                                        </li>
+                                        <li>
+
+                                            <input type="text" name="optionString" placeholder="option" class="form-control name_list" id="input2-group3">
+                                        </li>
+                                        <li>
+
+                                            <input type="text" name="optionString" placeholder="option" id="input2-group3" class="form-control name_list">
+                                        </li>
+                                        <li>
+
+                                            <input type="text" name="optionString" placeholder="option" id="input2-group3" class="form-control name_list">
+                                        </li>
+                                        <li>
+
+                                            <input type="text" name="optionString" placeholder="option" id="input2-group3" class="form-control name_list">
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                @*Dropdown*@
+                                <div class="container" id="dropdown1">
+                                    <br />
+                                    <br />
+
+                                    <div class="form-group">
+                                        <div name="add_name" id="add_name">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dynamic_field">
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+                                                        <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                @*Text Area*@
+                                <div class="form-group purple-border center" id="textarea">
+
+                                    <textarea class="form-control" id="textarea-char-counter" rows="3" name="optionString" placeholder="enter text"></textarea>
+
+                                </div>
+
+
+
+
+
+
+
+
+
+                                @*Images Click*@
+                                <div id="images">
+                                    <div class="row">
+                                        <div class="col-4">
+
+                                        </div>
+                                        <div class="col-4">
+
+                                        </div>
+
+                                        <div class="col-3">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*Checkbox*@
+                                <div class="container" id="chkbox">
+                                    <br />
+                                    <br />
+
+                                    <div class="form-group">
+                                        <div name="add_name" id="add_field">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dynamic_field1">
+
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+                                                        <td><button type="button" name="addtext" id="addtext" class="btn btn-success">+</button></td>
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                @*Star Rating*@
+
+
+
+                                <div class="container" style="text-align: center" id="star">
+                                    <input type="radio" name="optionString" placeholder="option" value="default" checked="checked" style="display:none">
+
+                                    <div class="star-rating" style="display: inline-block">
+
+                                        <input id="star-5" type="radio" name="optionString" placeholder="option" value="star-5">
+                                        <label for="star-5" title="5 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-4" type="radio" name="optionString" placeholder="option" value="star-4">
+                                        <label for="star-4" title="4 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-3" type="radio" name="optionString" placeholder="option" value="star-3">
+                                        <label for="star-3" title="3 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-2" type="radio" name="optionString" placeholder="option" value="star-2">
+                                        <label for="star-2" title="2 stars">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                        <input id="star-1" type="radio" name="optionString" placeholder="option" value="star-1">
+                                        <label for="star-1" title="1 star">
+                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
+
+                                @*Radio*@
+                                <div class="container" id="myRadio">
+                                    <br />
+                                    <br />
+
+                                    <div class="form-group">
+                                        <div name="add_name" id="add_field1">
+                                            <div class="table-responsive">
+
+                                                <table class="table table-bordered" id="dynamic_field2">
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input type="text" name="optionString" placeholder="Enter option" class="form-control name_list" /></td>
+                                                        <td><button type="button" name="addtext" id="addtext1" class="btn btn-success">+</button></td>
+                                                    </tr>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+                                @*Emoji Slider*@
+
+
+                                <div id="smileys" class="center">
+
+                                    <div class="container">
+                                        <div>
+                                            <img src="~/Images/Sad.png" style="width:120px;height:120px" />
+
+                                            <input type="radio" value="sad" name="optionString" placeholder="option" />
+                                        </div>
+
+                                        &nbsp;
+                                        <div>
+                                            <img src="~/Images/Neutral.png" style="width:120px;height:120px" />
+
+                                            <input type="radio" value="neutral" name="optionString" placeholder="option" />
+
+                                        </div>
+                                        &nbsp;
+                                        <div>
+                                            <img src="~/Images/happy.png" style="width:120px;height:120px" />
+
+                                            <input type="radio" value="happy" name="optionString" placeholder="option" />
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                @*File Upload*@
+
+
+                                <div class="file-upload" id="filechk">
+                                    <input type="radio" name="optionString" placeholder="option" value="default" checked="checked" style="display:none">
+                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+                                    <div class="image-upload-wrap">
+                                        <input class="file-upload-input" name="optionString" placeholder="option" type='file' onchange="readURL(this);" accept="image/*" />
+                                        <div class="drag-text">
+                                            <h3>Drag and drop a file or select add Image</h3>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-content">
+                                        <img class="file-upload-image" src="#" alt="your image" />
+                                        <div class="image-title-wrap">
+                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                            <button class="btn save hide">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div id="datepicker" class="centerd">
+
+                                    <input type="date" name="optionString" placeholder="option" id="dateofbirth" class="form-control name_list">
+                                </div>
+
+
+
+                                @*Slider*@
+                                @*<div class="range-slider">
+                <input class="range-slider__range" type="range" value="100" min="0" max="500">
+                <span class="range-slider__value">0</span>
+            </div>
+
+            <div class="range-slider">
+                <input class="range-slider__range" type="range" value="250" min="0" max="500" step="50">
+                <span class="range-slider__value">0</span>
+            </div>
+
+            <div class="range-slider">
+                <input class="range-slider__range" type="range" value="400" min="0" max="500">
+                <span class="range-slider__value">0</span>
+            </div>*@
+
+                                @*Thumb*@
+                                <div class="row center">
+                                    <div class="rating-area" id="thumb">
+                                        <div class="thumbs-up-circle align-center transition-fast">
+                                            <span class="thumbs-up transition-fast"><i class="icon fa fa-thumbs-up thumb " id="like" onclick="youFunction()"></i></span>
+                                        </div>
+                                        &nbsp; &nbsp;
+                                        <div class="thumbs-up-circle align-center transition-fast">
+                                            <span class="thumbs-down transition-fast"><i class="icon fa fa-thumbs-down thumb " id="dislike" onclick="meFunction()"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                @*email*@
+                                <div id="email">
+                                    @*pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"*@
+                                    <input type="email" name="emailinput" placeholder="Enter Your email">
+                                    <span class="message success">Email is Valid</span>
+                                    <span class="message error">Email is Invalid!</span>
+                                </div>
+
+
+                                @*slider*@
+                                <div slider id="slider-distance">
+                                    <div>
+                                        <div inverse-left style="width:70%;"></div>
+                                        <div inverse-right style="width:70%;"></div>
+                                        <div range style="left:30%;right:40%;"></div>
+                                        <span thumb style="left:30%;"></span>
+                                        <span thumb style="left:60%;"></span>
+                                        <div sign style="left:30%;">
+                                            <span id="value">30</span>
+                                        </div>
+                                        <div sign style="left:60%;">
+                                            <span id="value">60</span>
+                                        </div>
+                                    </div>
+                                    <input type="range" tabindex="0" value="30" max="100" min="0" step="1" oninput="
+                           this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                           var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                           var children=this.parentNode.childNodes[1].childNodes;
+                           children[1].style.width=value+'%';
+                           children[5].style.left=value+'%';
+                           children[7].style.left=value+'%';children[11].style.left =value+'%';
+                           children[11].childNodes[1].innerHTML=this.value;" />
+
+                                    <input type="range" tabindex="0" value="60" max="100" min="0" step="1" oninput="
+                           this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+                           var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                           var children=this.parentNode.childNodes[1].childNodes;
+                           children[3].style.width=(100-value)+'%';
+                           children[5].style.right=(100-value)+'%';
+                           children[9].style.left=value+'%';children[13].style.left =value+'%';
+                           children[13].childNodes[1].innerHTML=this.value;" />
+                                </div>
+
+
+
+                                @*phone*@
+                                <div class="panel panel-default center" id="password">
+                                    <div class="panel-body">
+                                        <div class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Email</label>
+                                                <div class="col-md-9">
+                                                    <input type="email" class="form-control" name="optionString" placeholder="Enter Email" value="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Password</label>
+                                                <div class="col-md-9">
+                                                    <input id="password-field" type="password" class="form-control" placeholder="Enter Password" name="optionString" value="">
+                                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                @*Toggle Menu*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                @*Buttons*@
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-success btn-sm" id="next">
+                                        <i class="fa fa-dot-circle-o"></i> Save
+                                    </button>
+                                    <button type="reset" class="btn btn-danger btn-sm" id="cancel">
+                                        <i class="fa fa-ban"></i> Cancel
+                                    </button>
+                                </div>
+
+                        </form>
+
+
+                        <table class="table" style="border:0px solid transparent" border="0">
+                            @foreach (var item1 in Model.Questions)
+                            {
+
+                                <tr>
+                                    <td>
+                                        Q. @Html.DisplayFor(modelItem => item1.question_Title)
+                                    </td>
+                                </tr>
+
+                                foreach (var item2 in item1.AnswerOptions)
+                                {
+                                    
+                                    <tr>
+                                        <td>
+                                            @*textquestion*@
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "textquestion")
+                                            {
+                                                <div id="textquestion" class="form-group">
+                                                    <input type="text" name="optionString" placeholder="Enter option" class="form-control name_list"> 
+                                                </div>
+
+                                                
+                                            }
+
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "myRadio")
+                                            {
+                                                if (@Html.DisplayFor(modelItem => item2.optionString).ToString() != "default")
+                                                {
+
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="@Html.DisplayFor(modelItem => item2.optionId)" name="optionString" class="custom-control-input" checked="">
+                                                        <label class="custom-control-label" for="@Html.DisplayFor(modelItem => item2.optionId)">@Html.DisplayFor(modelItem => item2.optionString)</label>
+                                                    </div>
+                                                }
+
+
+                                            }
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "chkbox")
+                                            {
+
+                                                if (@Html.DisplayFor(modelItem => item2.optionString).ToString() != "default")
+                                                {
+                                                    <div class="form-group">
+
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="@Html.DisplayFor(modelItem => item2.optionId)" unchecked="">
+                                                            <label class="custom-control-label" for="@Html.DisplayFor(modelItem => item2.optionId)">@Html.DisplayFor(modelItem => item2.optionString)</label>
+                                                        </div>
+                                                    </div>
+
+                                                }
+
+
+
+                                            }
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "dropdown1")
+                                            {
+
+                                                <select name="@Html.DisplayFor(modelItem => item2.questionId)">
+                                                    <option>Choose an option</option>
+                                                    @foreach (var item3 in item1.AnswerOptions)
+                                                    {
+
+                                                        if (@Html.DisplayFor(modelItem => item3.optionString).ToString() != "default")
+                                                        {
+
+                                                            <option value="@Html.DisplayFor(modelItem => item3.optionId)">@Html.DisplayFor(modelItem => item3.optionString)</option>
+                                                        }
+
+
+                                                    }
+                                                </select>
+                                                break;
+
+
+                                            }
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "star")
+                                            {
+
+                                                <div class="container" style="text-align: center" id="star">
+                                                    <div class="star-rating" style="display: inline-block">
+                                                        <input id="star-5" type="radio" name="optionString" placeholder="option" value="star-5">
+                                                        <label for="star-5" title="5 stars">
+                                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                                        </label>
+                                                        <input id="star-4" type="radio" name="optionString" placeholder="option" value="star-4">
+                                                        <label for="star-4" title="4 stars">
+                                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                                        </label>
+                                                        <input id="star-3" type="radio" name="optionString" placeholder="option" value="star-3">
+                                                        <label for="star-3" title="3 stars">
+                                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                                        </label>
+                                                        <input id="star-2" type="radio" name="optionString" placeholder="option" value="star-2">
+                                                        <label for="star-2" title="2 stars">
+                                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                                        </label>
+                                                        <input id="star-1" type="radio" name="optionString" placeholder="option" value="star-1">
+                                                        <label for="star-1" title="1 star">
+                                                            <i class="active fa fa-star" aria-hidden="true"></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+
+                                            }
+
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "textarea")
+                                            {
+                                                <div class="form-group purple-border center" id="textarea">
+
+                                                    <textarea class="form-control" rows="3" name="textarea" value="@Html.DisplayFor(modelItem => item2.optionString)"></textarea>
+
+                                                </div>
+                                            }
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "likert")
+                                            {
+                                                if (@Html.DisplayFor(modelItem => item2.optionString).ToString() != "default")
+                                                {
+
+
+
+                                                    <div class='wrap' id="likert">
+                                                        <div class="row" style="align-items:inherit">
+                                                            <div class="col-lg-2">
+                                                                <div>
+                                                                    <input type="radio" unchecked="" name="optionString">
+                                                                    <label class="form-control name_list" for="@Html.DisplayFor(modelItem => item2.optionId)">@Html.DisplayFor(modelItem => item2.optionString)</label>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+
+
+
+
+
+                                                }
+                                            }
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "smileys")
+                                            {
+                                                <div id="smileys" class="center">
+                                                    <div>
+                                                        <img src="~/Images/Sad.png" style="width:120px;height:120px" />
+
+                                                        <input type="radio" value="sad" name="optionString" placeholder="option" unchecked="" />
+                                                    </div>
+
+                                                    &nbsp;
+                                                    <div>
+                                                        <img src="~/Images/Neutral.png" style="width:120px;height:120px" />
+
+                                                        <input type="radio" value="neutral" name="optionString" placeholder="option" unchecked="" />
+
+                                                    </div>
+                                                    &nbsp;
+                                                    <div>
+                                                        <img src="~/Images/happy.png" style="width:120px;height:120px" />
+
+                                                        <input type="radio" value="happy" name="optionString" placeholder="option" unchecked="" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            }
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "filechk")
+                                            {
+
+                                                <div class="file-upload" id="filechk">
+
+                                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+                                                    <div class="image-upload-wrap">
+                                                        <input class="file-upload-input" name="optionString" placeholder="option" type='file' onchange="readURL(this);" accept="image/*" />
+                                                        <div class="drag-text">
+                                                            <h3>Drag and drop a file or select add Image</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="file-upload-content">
+                                                        <img class="file-upload-image" src="#" alt="your image" />
+                                                        <div class="image-title-wrap">
+                                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                                            <button class="btn save hide">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "thumb")
+                                            {
+                                                <div class="row center">
+                                                    <div class="rating-area" id="thumb">
+                                                        <div class="thumbs-up-circle align-center transition-fast">
+                                                            <span class="thumbs-up transition-fast"><i class="icon fa fa-thumbs-up thumb"></i></span>
+                                                        </div>
+                                                        &nbsp; &nbsp;
+                                                        <div class="thumbs-up-circle align-center transition-fast">
+                                                            <span class="thumbs-down transition-fast"><i class="icon fa fa-thumbs-down thumb"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+
+
+
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "datepicker")
+                                            {
+
+                                                <div id="datepicker" class="centerd">
+
+                                                    <input type="date" name="optionString" placeholder="option" id="dateofbirth" class="form-control name_list">
+                                                </div>
+                                            }
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "slider-distance")
+                                            {
+                                                <div slider id="slider-distance">
+                                                    <div>
+                                                        <div inverse-left style="width:70%;"></div>
+                                                        <div inverse-right style="width:70%;"></div>
+                                                        <div range style="left:30%;right:40%;"></div>
+                                                        <span thumb style="left:30%;"></span>
+                                                        <span thumb style="left:60%;"></span>
+                                                        <div sign style="left:30%;">
+                                                            <span id="value">30</span>
+                                                        </div>
+                                                        <div sign style="left:60%;">
+                                                            <span id="value">60</span>
+                                                        </div>
+                                                    </div>
+                                                    <input type="range" tabindex="0" value="30" max="100" min="0" step="1" oninput="
+                           this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                           var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                           var children=this.parentNode.childNodes[1].childNodes;
+                           children[1].style.width=value+'%';
+                           children[5].style.left=value+'%';
+                           children[7].style.left=value+'%';children[11].style.left =value+'%';
+                           children[11].childNodes[1].innerHTML=this.value;" />
+
+                                                    <input type="range" tabindex="0" value="60" max="100" min="0" step="1" oninput="
+                           this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+                           var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                           var children=this.parentNode.childNodes[1].childNodes;
+                           children[3].style.width=(100-value)+'%';
+                           children[5].style.right=(100-value)+'%';
+                           children[9].style.left=value+'%';children[13].style.left =value+'%';
+                           children[13].childNodes[1].innerHTML=this.value;" />
+                                                </div>
+                                            }
+
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "password")
+                                            {
+                                                <div class="panel panel-default center" id="password">
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label">Email</label>
+                                                                <div class="col-md-9">
+                                                                    <input type="email" class="form-control" name="email" placeholder="Enter Email" value="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label">Password</label>
+                                                                <div class="col-md-9">
+                                                                    <input id="password-field" type="password" class="form-control" placeholder="Enter Password" name="password" value="">
+                                                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            @if (@Html.DisplayFor(modelItem => item1.questionType).ToString() == "email")
+                                            {
+                                                <div id="email">
+                                                    @*pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"*@
+                                                    <input type="email" name="emailinput" placeholder="Enter Your email">
+                                                    <span class="message success">Email is Valid</span>
+                                                    <span class="message error">Email is Invalid!</span>
+                                                </div>
+                                            }
+
+
+                                        </td>
+                                    </tr>
+                                    
+                                }
+
+                            }
+                        </table>
+
+
+
+
+
+
+
+
+                        @*</ table >
+
+                                        </ div >
+
+                                    </ div >
+                                </ div >
+                            </ div >*@
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
+
+<script>
+    $("cancel").click(function () {
+        $("#textquestion").hide();
+        $("#slide").hide();
+        $("#choice").hide();
+        $("#likert").hide();
+        $("#textarea").hide();
+        $("#chkbox").hide();
+        $("#my").hide();
+        $("#star").hide();
+        $("#smileys").hide();
+        $("#myRadio").hide();
+        $("#filechk").hide();
+        $("#datepicker").hide();
+        $("#dropdown1").hide();
+        $("#thumb").hide();
+        $("#email").hide();
+        $("#slider-distance").hide();
+        $("#password").hide();
+        $("#toggle").hide();
+        
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#textquestion").hide();
+        $("#slide").hide();
+        $("#choice").hide();
+        $("#likert").hide();
+        $("#textarea").hide();
+        $("#chkbox").hide();
+        $("#my").hide();
+        $("#star").hide();
+        $("#smileys").hide();
+        $("#myRadio").hide();
+        $("#filechk").hide();
+        $("#datepicker").hide();
+        $("#dropdown1").hide();
+        $("#thumb").hide();
+        $("#email").hide();
+        $("#slider-distance").hide();
+        $("#password").hide();
+        $("#toggle").hide();
+    });
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        //document.getElementById("myDropdown").classList.toggle("show");
+
+        $('#myDropdown').show();
+        return false;
+
+        $("multiple").click(function () {
+            $("#slide").load("~/Scripts/sliderRange.html #p1");
+        });
+
+    }
+
+    $('#ddl').change(function () {
+        var selectedValue = (jQuery(this).val());
+        //alert(selectedValue);
+        //Depend on Value i.e. 0 or 1 respective function gets called.
+        switch (selectedValue) {
+            case "slide":
+                $("#textquestion").hide();
+                $("#slide").show();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#my").hide();
+                $("#chkbox").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "choice":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").show();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#my").hide();
+                $("#chkbox").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "likert":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").show();
+                $("#textarea").hide();
+                $("#my").hide();
+                $("#chkbox").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "textarea":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").show();
+                $("#my").hide();
+                $("#chkbox").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "chkbox":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#my").hide();
+                $("#chkbox").show();
+                $("#star").hide();
+                $("smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "range":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").show();
+                $("#star").hide();
+                $("#myCanvas").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "star":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").show();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "smileys":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").show();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            case "myRadio":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").show();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            case "filechk":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").show();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            case "datepicker":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").show();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            case "dropdown1":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").show();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            case "thumb":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").show();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+            case "email":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").show();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            case "slider-distance":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").show();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+
+            case "password":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").show();
+                $("#toggle").hide();
+                break;
+
+
+            case "toggle":
+                $("#textquestion").hide();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").show();
+                break;
+            case "textquestion":
+                $("#textquestion").show();
+                $("#slide").hide();
+                $("#choice").hide();
+                $("#likert").hide();
+                $("#textarea").hide();
+                $("#chkbox").hide();
+                $("#my").hide();
+                $("#star").hide();
+                $("#smileys").hide();
+                $("#myRadio").hide();
+                $("#filechk").hide();
+                $("#datepicker").hide();
+                $("#dropdown1").hide();
+                $("#thumb").hide();
+                $("#email").hide();
+                $("#slider-distance").hide();
+                $("#password").hide();
+                $("#toggle").hide();
+                break;
+
+            //etc...
+            default:
+                alert("catch default");
+                break;
+        }
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    //window.onclick = function (event) {
+    //     if (!event.target.matches('.dropbtn')) {
+    //         var dropdowns = document.getElementsByClassName("dropdown-content");
+    //         var i;
+    //         for (i = 0; i < dropdowns.length; i++) {
+    //             var openDropdown = dropdowns[i];
+    //             if (openDropdown.classList.contains('show')) {
+    //                 openDropdown.classList.remove('show');
+    //             }
+    //         }
+    //     }
+    // }
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+</script>
+<script>
+    $('input:radio').click(function () {
+        var enthusiasm = $('input:radio[name=enthusiasm]:checked').val();
+        var knowledgeable = $('input:radio[name=knowledgeable]:checked').val();
+        var timeliness = $('input:radio[name=timeliness]:checked').val();
+        var helpful = $('input:radio[name=helpful]:checked').val();
+
+        //todo get average column of answered columns
+        //highlight average column
+
+        // provide plus minus arrows next to each answer to indicate deviation from average
+    });
+</script>
+<script>
+    var slider = document.getElementById("my");
+    output.innerHTML = slider.value;
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+</script>
+
+<script>
+    const INPUTS = document.querySelectorAll('#smileys input');
+
+    function updateValue(e) {
+        document.querySelector('#result').innerHTML = e.target.value;
+    }
+
+    INPUTS.forEach(el => el.addEventListener('click', (e) => updateValue(e)));
+
+</script>
+
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.image-title').html(input.files[0].name);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+    save.addEventListener('click', (e) => {
+        e.preventDefault();
+        // get result to data uri
+        let imgSrc = cropper.getCroppedCanvas({
+            width: img_w.value // input value
+        }).toDataURL();
+        // remove hide class of img
+        cropped.classList.remove('hide');
+        img_result.classList.remove('hide');
+        // show image cropped
+        cropped.src = imgSrc;
+        dwn.classList.remove('hide');
+        dwn.download = 'imagename.png';
+        dwn.setAttribute('href', imgSrc);
+    });
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#add').click(function () {
+            i++;
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_name').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_name')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    //if (document.getElementById("thumb")) {
+    //    if (document.getElementById("like")) {
+      
+    function youFunction() {
+        document.getElementById("like").innerHTML = "YOU LIKED!";
+    }
+
+        
+            function meFunction() {
+                document.getElementById("dislike").innerHTML = "YOU DISLIKED!";
+
+            }
+        
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#addtext').click(function () {
+            i++;
+            $('#dynamic_field1').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_field').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_field')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#addtext1').click(function () {
+            i++;
+            $('#dynamic_field2').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_field1').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_field1')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        var j = 1;
+        $('#addtext2').click(function () {
+            i++;
+            $('#dynamic_field3').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter otion" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#col' + button_id + '').remove();
+        });
+
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_field2').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_field2')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+    
+    $(document).ready(function () {
+        var i = 1;
+        $('#add_fieldtoogle').click(function () {
+            i++;
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_name').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_name')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    var rangeSlider = function () {
+        var slider = $('.range-slider'),
+            range = $('.range-slider__range'),
+            value = $('.range-slider__value');
+
+        slider.each(function () {
+
+            value.each(function () {
+                var value = $(this).prev().attr('value');
+                $(this).html(value);
+            });
+
+            range.on('input', function () {
+                $(this).next(value).html(this.value);
+            });
+        });
+    };
+
+    rangeSlider();
+
+</script>
+
+<script>
+    $(function () {
+
+
+        var regExp = /^([\w\.\+]{1,})([^\W])([\w]{1,})(\.[\w]{1,})+$/;
+
+        $('[type="email"]').on('keyup', function () {
+            $('.message').hide();
+            regExp.test($(this).val()) ? $('.message.error').show() : $('.message.success').show();
+        });
+
+    });
+</script>
+
+
+
+
+
+
+<script>
+    $(".toggle-password").click(function () {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+
+

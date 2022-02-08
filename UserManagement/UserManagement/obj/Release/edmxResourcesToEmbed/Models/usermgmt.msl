@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+    <EntitySetMapping Name="AnswerOptions">
+      <EntityTypeMapping TypeName="Database1Model.AnswerOption">
+        <MappingFragment StoreEntitySet="AnswerOption">
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="optionString" ColumnName="optionString" />
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feedbacks">
+      <EntityTypeMapping TypeName="Database1Model.Feedback">
+        <MappingFragment StoreEntitySet="Feedback">
+          <ScalarProperty Name="feedbackId" ColumnName="feedbackId" />
+          <ScalarProperty Name="feedbackString" ColumnName="feedbackString" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="responsderId" ColumnName="responsderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="Database1Model.Question">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+          <ScalarProperty Name="question_Title" ColumnName="question_Title" />
+          <ScalarProperty Name="surveyid" ColumnName="surveyid" />
+          <ScalarProperty Name="questionType" ColumnName="questionType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responders">
+      <EntityTypeMapping TypeName="Database1Model.Responder">
+        <MappingFragment StoreEntitySet="Responder">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="responder1" ColumnName="responder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responses">
+      <EntityTypeMapping TypeName="Database1Model.Response">
+        <MappingFragment StoreEntitySet="Response">
+          <ScalarProperty Name="questionId" ColumnName="questionId" />
+          <ScalarProperty Name="optionId" ColumnName="optionId" />
+          <ScalarProperty Name="responseId" ColumnName="responseId" />
+          <ScalarProperty Name="responderId" ColumnName="responderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Surveys">
+      <EntityTypeMapping TypeName="Database1Model.Survey">
+        <MappingFragment StoreEntitySet="Survey">
+          <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+          <ScalarProperty Name="surveyName" ColumnName="surveyName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="startData" ColumnName="startData" />
+          <ScalarProperty Name="endDate" ColumnName="endDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Database1Model.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="confirmPassword" ColumnName="confirmPassword" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

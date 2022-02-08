@@ -1,0 +1,267 @@
+﻿@model UserManagement.Models.Survey
+
+@{
+    ViewBag.Title = "generateReport";
+    Layout = "~/Views/Shared/_PollsterLayout.cshtml";
+
+}
+
+
+<!DOCTYPE html>
+<style>
+     body {
+        font-family: cursive;
+        font-size: 22px;
+        line-height: 2;
+    }
+</style>
+
+
+
+
+<style>
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+            .dropdown-content a:hover {
+                background-color: #f1f1f1;
+            }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+
+    .dropdown-content {
+        left: 0;
+    }
+</style>
+<html lang="en-US">
+<head>
+    @*For bar chart*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+
+<body>
+    
+
+
+    @*<table class="table" style="border:0px solid transparent" border="0">
+            @foreach (var item1 in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        Q. @Html.DisplayFor(modelItem => item1.question_Title)
+                    </td>
+                </tr>
+
+
+            }
+        </table>*@
+    <div id="title">
+        <div class="card-header">
+            <strong>Survey Title:</strong>&nbsp;&nbsp;@Html.Raw(ViewBag.SurveyName)
+
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+
+
+
+    @*Pie chart*@
+    <div id="myDivMain">
+
+    </div>
+    <br />
+    <br />
+    <br />
+    <canvas id="bar-chart" width="15" height="5"></canvas>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    @*<div id="myDiv">*@<!-- Plotly chart will be drawn inside this DIV -->@*</div>*@
+
+    <div id="donutchart" style="width: 900px; height: 500px; align-self:center"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Numeric JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+    <script>
+
+        var Array_Percentages = new Array()
+        var Array_Questions = new Array()
+        var Array_Answers = new Array()
+
+        var jsonObj = @Html.Raw(Json.Encode(ViewBag.results));
+
+        var counterr=0;
+        var divId = "";
+        for (i = 0; i < jsonObj.length; i++) {
+
+            Array_Answers.push(jsonObj[i].answerOption);
+            Array_Percentages.push(jsonObj[i].ResponsePercentage);
+
+            if(jsonObj[i].questionId == -1)
+            {
+                counterr++;
+                divId = "div_"+counterr;
+
+                Array_Percentages = removeA(Array_Percentages,0);
+                var data = [{
+                    //values: [19, 26, 55],
+                    values: Array_Percentages,
+                    //labels: ['Residential', 'Non-Residential', 'Utility'],
+                    labels: Array_Answers,
+                    type: 'pie'
+                }];
+
+                var element = document.createElement("div");
+                element.setAttribute("id", divId);
+                var span_question = document.createElement('span')
+                span_question.innerHTML = "Question :" + jsonObj[i-1].question_Title  + "       Total Responses are : ("+jsonObj[i-1].responses +")";
+                document.getElementById('myDivMain').appendChild(span_question);
+                document.getElementById('myDivMain').appendChild(element);
+
+                Plotly.newPlot(divId, data, {}, { showSendToCloud: true });
+
+
+                Array_Answers = [];
+                Array_Percentages = []
+            }
+        }
+
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax= arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Numeric JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        window.onload = function () {
+
+            var options = {
+                animationEnabled: true,
+                title: {
+                    text: "ACME Corporation Apparel Sales"
+                },
+                data: [{
+                    type: "doughnut",
+                    innerRadius: "40%",
+                    showInLegend: true,
+                    legendText: "{label}",
+                    indexLabel: "{label}: #percent%",
+                    dataPoints: [
+                        { label: "Department Stores", y: 6492917 },
+                        { label: "Discount Stores", y: 7380554 },
+                        { label: "Stores for Men / Women", y: 1610846 },
+                        { label: "Teenage Specialty Stores", y: 950875 },
+                        { label: "All other outlets", y: 900000 }
+                    ]
+                }]
+            };
+            $("#chartContainer2").CanvasJSChart(options);
+
+        }
+    </script>
+
+
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<UserManagement.Models.Feedback>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.feedbackString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responder.responder1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.feedbackString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Responder.responder1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.username)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.feedbackId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.feedbackId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.feedbackId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,2283 @@
+﻿@model UserManagement.Models.Survey
+
+@{
+    ViewBag.Title = "getSurveyView";
+    Layout = "~/Views/Shared/_PreviewLayout.cshtml";
+
+}
+<!-- Start VWO Smartcode (Asynchronous) -->
+<script src="~/Content/js/vendor/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+    function changeDropdown(sId, qId, option) {
+        var optionId = "#" + option;
+       
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optId: $(optionId).val()
+        };
+        //alert(JSON.stringify(respObj));
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function changeThumb(sId, qId, option) {
+        
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optionId: $(option).val()
+        };
+        //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function fillopenquestion(sId, qId, option) {
+        var optionId = "#" + option;
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optId: $(optionId).val()
+        };
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    function changeStar(sId, qNamee, option) {
+        //alert(sId);
+        var optionId = "#" + option;
+         var respObj = {
+            surveyId: sId,
+            questionId: qId,
+             optId: $(optionId).val()
+        };
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    function changeCheckbox(sId, qName, option) {
+        //alert(sId);
+        var favorite = [];
+        $.each($("input[name='qName']:checked"), function(){
+            favorite.push($(this).val());
+        });
+        var respObj = {
+            surveyId: sId,
+            questionId: qName,
+            optId: favorite
+        };
+    //alert("My favourite sports are: " + favorite.join(", "));
+    //    //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponseforCheckbox")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function selectRadiobtn(sId, qName, option) {
+        //alert(qName);
+        var val1=$("input[name='"+qName+"']:checked").val();
+        //alert(option);
+        var respObj = {
+            surveyId: sId,
+            questionId: qName,
+            optId: val1
+        };
+        //alert(respObj);
+
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function selectLikert(sId, qId, option) {
+        //alert(option);
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optionId: $(option).val()
+        };
+        //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+
+
+</script>
+
+<script type="text/javascript">
+    function selectSmiley(sId, qId, option) {
+        //alert(option);
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optionId: $(option).val()
+        };
+        //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+
+
+</script>
+
+<script type="text/javascript">
+    function chooseDate(sId, qId, option) {
+        //alert(sId);
+        var optionId = "#" + option;
+        var respObj = {
+            surveyId: sId,
+            questionId: optionId,
+            optId: $(optionId).val()
+        };
+        //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+
+
+</script>
+
+<script type="text/javascript">
+    function DragSlider(sId, qId, option) {
+        //alert(option);
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optionId: $(option).val()
+        };
+        alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+
+
+</script>
+
+<script type="text/javascript">
+    function selectPassword(sId, qId, option) {
+        var optionId = "#" + option;
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optionId: $(optionId).val()
+        };
+        //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    function selectEmail(sId, qId, option) {
+        var optionId = "#" + option;
+        var respObj = {
+            surveyId: sId,
+            questionId: qId,
+            optId: $(optionId).val()
+        };
+        //alert(respObj);
+        $.ajax({
+            url: "@Url.Action("SubmitResponse")",
+            data: JSON.stringify(respObj),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+
+
+</script>
+
+
+
+@*For modal*@
+<style type="text/css">
+    body {
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    .modal-confirm {
+        color: #636363;
+        width: 325px;
+    }
+
+        .modal-confirm .modal-content {
+            padding: 20px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .modal-confirm .modal-header {
+            border-bottom: none;
+            position: relative;
+        }
+
+        .modal-confirm h4 {
+            text-align: center;
+            font-size: 26px;
+            margin: 30px 0 -15px;
+        }
+
+        .modal-confirm .form-control, .modal-confirm .btn {
+            min-height: 40px;
+            border-radius: 3px;
+        }
+
+        .modal-confirm .close {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+
+        .modal-confirm .modal-footer {
+            border: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .modal-confirm .icon-box {
+            color: #fff;
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: -70px;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            z-index: 9;
+            background: #82ce34;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+
+            .modal-confirm .icon-box i {
+                font-size: 58px;
+                position: relative;
+                top: 3px;
+            }
+
+        .modal-confirm.modal-dialog {
+            margin-top: 80px;
+        }
+
+        .modal-confirm .btn {
+            color: #fff;
+            border-radius: 4px;
+            background: #82ce34;
+            text-decoration: none;
+            transition: all 0.4s;
+            line-height: normal;
+            border: none;
+        }
+
+            .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+                background: #6fb32b;
+                outline: none;
+            }
+
+    .trigger-btn {
+        display: inline-block;
+        margin: 100px auto;
+    }
+</style>
+
+
+
+<style>
+
+
+    html, body {
+        font-family: cursive;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+</style>
+<style>
+    /* The container */
+    .containers {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default checkbox */
+        .containers input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* Create a custom checkbox */
+    .checkmarks {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containers:hover input ~ .checkmarks {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .containers input:checked ~ .checkmarks {
+        background-color: #2196F3;
+    }
+
+
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmarks:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .containers input:checked ~ .checkmarks:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .containers .checkmarks:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+</style>
+<style>
+    /* The container */
+    .containerd {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default radio button */
+        .containerd input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .containerd:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .containerd input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .containerd input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .containerd .checkmark:after {
+        top: 8px;
+        left: 8px;
+        width: 7px;
+        height: 7px;
+        border-radius: 20%;
+        background: white;
+    }
+</style>
+@*<style>
+        input[type=checkbox] + label {
+            display: block;
+            margin: 0.2em;
+            cursor: pointer;
+            padding: 0.2em;
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+            input[type=checkbox] + label:before {
+                content: "\2714";
+                border: 0.1em solid #000;
+                border-radius: 0.2em;
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                padding-left: 0.2em;
+                padding-bottom: 0.3em;
+                margin-right: 0.2em;
+                vertical-align: bottom;
+                color: transparent;
+                transition: .2s;
+            }
+
+            input[type=checkbox] + label:active:before {
+                transform: scale(0);
+            }
+
+            input[type=checkbox]:checked + label:before {
+                background-color: MediumSeaGreen;
+                border-color: MediumSeaGreen;
+                color: #fff;
+            }
+
+            input[type=checkbox]:disabled + label:before {
+                transform: scale(1);
+                border-color: #aaa;
+            }
+
+            input[type=checkbox]:checked:disabled + label:before {
+                transform: scale(1);
+                background-color: #bfb;
+                border-color: #bfb;
+            }
+    </style>*@
+<style>
+    .field-icon {
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .container {
+        padding-top: 50px;
+        margin: auto;
+    }
+</style>
+<style>
+    body {
+        background-color: #666;
+        margin: 100px 50px;
+    }
+
+    [slider] {
+        position: relative;
+        height: 14px;
+        border-radius: 10px;
+        text-align: left;
+        margin: 45px 0 10px 0;
+    }
+
+        [slider] > div {
+            position: absolute;
+            left: 13px;
+            right: 15px;
+            height: 14px;
+        }
+
+            [slider] > div > [inverse-left] {
+                position: absolute;
+                left: 0;
+                height: 14px;
+                border-radius: 10px;
+                background-color: #CCC;
+                margin: 0 7px;
+            }
+
+            [slider] > div > [inverse-right] {
+                position: absolute;
+                right: 0;
+                height: 14px;
+                border-radius: 10px;
+                background-color: #CCC;
+                margin: 0 7px;
+            }
+
+            [slider] > div > [range] {
+                position: absolute;
+                left: 0;
+                height: 14px;
+                border-radius: 14px;
+                background-color: #1ABC9C;
+            }
+
+            [slider] > div > [thumb] {
+                position: absolute;
+                top: -7px;
+                z-index: 2;
+                height: 28px;
+                width: 28px;
+                text-align: left;
+                margin-left: -11px;
+                cursor: pointer;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+                background-color: #FFF;
+                border-radius: 50%;
+                outline: none;
+            }
+
+        [slider] > input[type=range] {
+            position: absolute;
+            pointer-events: none;
+            -webkit-appearance: none;
+            z-index: 3;
+            height: 14px;
+            top: -2px;
+            width: 100%;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            filter: alpha(opacity=0);
+            -moz-opacity: 0;
+            -khtml-opacity: 0;
+            opacity: 0;
+        }
+
+    div[slider] > input[type=range]::-ms-track {
+        -webkit-appearance: none;
+        background: transparent;
+        color: transparent;
+    }
+
+    div[slider] > input[type=range]::-moz-range-track {
+        -moz-appearance: none;
+        background: transparent;
+        color: transparent;
+    }
+
+    div[slider] > input[type=range]:focus::-webkit-slider-runnable-track {
+        background: transparent;
+        border: transparent;
+    }
+
+    div[slider] > input[type=range]:focus {
+        outline: none;
+    }
+
+    div[slider] > input[type=range]::-ms-thumb {
+        pointer-events: all;
+        width: 28px;
+        height: 28px;
+        border-radius: 0px;
+        border: 0 none;
+        background: red;
+    }
+
+    div[slider] > input[type=range]::-moz-range-thumb {
+        pointer-events: all;
+        width: 28px;
+        height: 28px;
+        border-radius: 0px;
+        border: 0 none;
+        background: red;
+    }
+
+    div[slider] > input[type=range]::-webkit-slider-thumb {
+        pointer-events: all;
+        width: 28px;
+        height: 28px;
+        border-radius: 0px;
+        border: 0 none;
+        background: red;
+        -webkit-appearance: none;
+    }
+
+    div[slider] > input[type=range]::-ms-fill-lower {
+        background: transparent;
+        border: 0 none;
+    }
+
+    div[slider] > input[type=range]::-ms-fill-upper {
+        background: transparent;
+        border: 0 none;
+    }
+
+    div[slider] > input[type=range]::-ms-tooltip {
+        display: none;
+    }
+
+    [slider] > div > [sign] {
+        opacity: 0;
+        position: absolute;
+        margin-left: -11px;
+        top: -39px;
+        z-index: 3;
+        background-color: #1ABC9C;
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 28px;
+        -webkit-border-radius: 28px;
+        align-items: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+        [slider] > div > [sign]:after {
+            position: absolute;
+            content: '';
+            left: 0;
+            border-radius: 16px;
+            top: 19px;
+            border-left: 14px solid transparent;
+            border-right: 14px solid transparent;
+            border-top-width: 16px;
+            border-top-style: solid;
+            border-top-color: #1ABC9C;
+        }
+
+        [slider] > div > [sign] > span {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 28px;
+        }
+
+    [slider]:hover > div > [sign] {
+        opacity: 1;
+    }
+</style>
+<style>
+    body {
+        padding: 50px;
+    }
+
+    input {
+        font-size: 20px;
+        width: 50%;
+        padding: 15px;
+        text-align: left;
+        border: 5px solid rgba(0, 0, 0, .3);
+    }
+
+    .message {
+        font: 20px Helvetica, Arial, Sans-serif;
+        display: none;
+        width: 10%;
+        padding: 10px;
+        color: #fff;
+    }
+
+    .error {
+        background: red;
+    }
+
+    .success {
+        background: green;
+    }
+</style>
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+</style>
+<style>
+    body {
+        background: #f5f5f5;
+    }
+
+    .rating-area {
+        width: 200px;
+        padding: 60px 0 60px 0;
+        background: #ffffff;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .align-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .transition-fast {
+        transition: 0.2s ease-out;
+    }
+
+    .thumbs-up-circle {
+        width: 50px;
+        height: 50px;
+        background: #eeeeee;
+        border-radius: 50%;
+        box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+        cursor: pointer;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .thumbs-up {
+        color: #2196f3;
+        font-size: 24px;
+        transform: rotate(0) translate(0);
+    }
+
+    .thumbs-up-circle:hover {
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+        .thumbs-up-circle:hover .thumbs-up {
+            color: #1976D2;
+            transform: rotate(-5deg) translate(0px, -1px);
+        }
+
+    .thumbs-up-circle:active {
+        background: #e0e0e0;
+        box-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+    }
+
+        .thumbs-up-circle:active .thumbs-up {
+            color: #065bae;
+            transition: 0.1s;
+            transform: rotate(-10deg) translate(0px, -2px);
+        }
+
+    .thumbs-down {
+        color: #c13b2a;
+        font-size: 24px;
+        transform: rotate(0) translate(0);
+    }
+
+    .thumbs-up-circle:hover .thumbs-down {
+        color: #565656;
+        transform: rotate(5deg) translate(0px, 1px);
+    }
+
+    .thumbs-up-circle:active .thumbs-down {
+        color: #424242;
+        transition: 0.1s;
+        transform: rotate(10deg) translate(0px, 2px);
+    }
+</style>
+<style>
+    .centerd {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+    }
+</style>
+<style>
+    .center {
+        disp = 70%;
+    }
+
+    .purple-border textarea {
+        border: 1px solid #ba68c8;
+    }
+
+    .purple-border .form-control:focus {
+        border: 1px solid #ba68c8;
+        box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+    }
+
+    .green-border-focus .form-control:focus {
+        border: 1px solid #8bc34a;
+        box-shadow: 0 0 0 0.2rem rgba(139, 195, 74, .25);
+    }
+</style>
+<style>
+    body {
+        font-family: sans-serif;
+        background-color: #eeeeee;
+    }
+
+    .file-upload {
+        background-color: #ffffff;
+        width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .file-upload-btn {
+        width: 100%;
+        margin: 0;
+        color: #fff;
+        background: #1FB264;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #15824B;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+        .file-upload-btn:hover {
+            background: #1AA059;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .file-upload-btn:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+
+    .file-upload-content {
+        display: none;
+        text-align: center;
+    }
+
+    .file-upload-input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .image-upload-wrap {
+        margin-top: 20px;
+        border: 4px dashed #1FB264;
+        position: relative;
+    }
+
+        .image-dropping,
+        .image-upload-wrap:hover {
+            background-color: #1FB264;
+            border: 4px dashed #ffffff;
+        }
+
+    .image-title-wrap {
+        padding: 0 15px 15px 15px;
+        color: #222;
+    }
+
+    .drag-text {
+        text-align: center;
+    }
+
+        .drag-text h3 {
+            font-weight: 100;
+            text-transform: uppercase;
+            color: #15824B;
+            padding: 60px 0;
+        }
+
+    .file-upload-image {
+        max-height: 200px;
+        max-width: 200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .remove-image {
+        width: 200px;
+        margin: 0;
+        color: #fff;
+        background: #cd4535;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        border-bottom: 4px solid #b02818;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+        .remove-image:hover {
+            background: #c13b2a;
+            color: #ffffff;
+            transition: all .2s ease;
+            cursor: pointer;
+        }
+
+        .remove-image:active {
+            border: 0;
+            transition: all .2s ease;
+        }
+</style>
+<style>
+    .centerd {
+        padding: 20px;
+    }
+</style>
+<style>
+    .star-rating {
+        direction: rtl;
+        display: inline-block;
+        padding: 30px;
+    }
+
+        .star-rating input[type=radio] {
+            display: none;
+        }
+
+        .star-rating label {
+            color: #bbb;
+            font-size: 40px;
+            padding: 0;
+            cursor: pointer;
+            -webkit-transition: all .3s ease-in-out;
+            transition: all .3s ease-in-out;
+        }
+
+            .star-rating label:hover,
+            .star-rating label:hover ~ label,
+            .star-rating input[type=radio]:checked ~ label {
+                color: #f2b600;
+            }
+
+    .div {
+        height: 100px;
+        width: 500px;
+        background-color: powderblue;
+    }
+</style>
+<style>
+    div.stars {
+        width: 270px;
+        display: inline-block;
+    }
+
+    input.star {
+        display: none;
+    }
+
+    label.star {
+        float: right;
+        padding: 10px;
+        font-size: 36px;
+        color: #444;
+        transition: all .2s;
+    }
+
+    input.star:checked ~ label.star:before {
+        content: '\f005';
+        color: #FD4;
+        transition: all .25s;
+    }
+
+    input.star-5:checked ~ label.star:before {
+        color: #FE7;
+        text-shadow: 0 0 20px #952;
+    }
+
+    input.star-1:checked ~ label.star:before {
+        color: #F62;
+    }
+
+    label.star:hover {
+        transform: rotate(-15deg) scale(1.3);
+    }
+
+    label.star:before {
+        content: '\f006';
+        font-family: FontAwesome;
+    }
+</style>
+<style>
+    .dropbtn {
+        background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+    .dropdown a:hover {
+        background-color: #ddd;
+    }
+
+    .show {
+        display: block;
+    }
+
+
+
+    table.striped-columns tbody td:nth-of-type(even),
+    table.striped-columns th:nth-of-type(even) {
+        background: rgb(235, 227, 209);
+    }
+
+    table.border {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+        table.border td,
+        table.border th {
+            border: 1px solid grey;
+            padding: 3px;
+        }
+
+    html, body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrap {
+        font: 12px Arial, san-serif;
+    }
+
+    h1.likert-header {
+        padding-left: 4.25%;
+        margin: 20px 0 0;
+    }
+
+    form .statement {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 30px 0 0 4.25%;
+        margin-bottom: 10px;
+    }
+
+    form .likert {
+        list-style: none;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 35px;
+        display: block;
+        border-bottom: 2px solid #efefef;
+    }
+
+        form .likert:last-of-type {
+            border-bottom: 0;
+        }
+
+        form .likert:before {
+            content: '';
+            position: relative;
+            top: 11px;
+            left: 9.5%;
+            display: block;
+            background-color: #efefef;
+            height: 4px;
+            width: 78%;
+        }
+
+        form .likert li {
+            display: inline-block;
+            width: 19%;
+            text-align: center;
+            vertical-align: top;
+        }
+
+            form .likert li input[type=radio] {
+                display: block;
+                position: relative;
+                top: 0;
+                left: 50%;
+                margin-left: -6px;
+            }
+
+            form .likert li label {
+                width: 100%;
+            }
+
+    form .buttons {
+        margin: 30px 0;
+        padding: 0 4.25%;
+        text-align: right;
+    }
+
+        form .buttons button {
+            padding: 5px 10px;
+            background-color: #67ab49;
+            border: 0;
+            border-radius: 3px;
+        }
+
+        form .buttons .clear {
+            background-color: #e9e9e9;
+        }
+
+        form .buttons .submit {
+            background-color: #67ab49;
+        }
+
+        form .buttons .clear:hover {
+            background-color: #ccc;
+        }
+
+        form .buttons .submit:hover {
+            background-color: #14892c;
+        }
+</style>
+<style>
+    .container-contact100 {
+        width: 100%;
+        min-height: 100vh;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        background: #d867c6;
+        background: -webkit-linear-gradient(45deg, #c77ff2, #e8519e);
+        background: -o-linear-gradient(45deg, #c77ff2, #e8519e);
+        background: -moz-linear-gradient(45deg, #c77ff2, #e8519e);
+        background: linear-gradient(45deg, palevioletred, palevioletred);
+    }
+</style>
+<style>
+    html, body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .wrap {
+        font: 12px Arial, san-serif;
+    }
+
+    h1.likert-header {
+        padding-left: 4.25%;
+        margin: 20px 0 0;
+    }
+
+    form .statement {
+        display: block;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 30px 0 0 4.25%;
+        margin-bottom: 10px;
+    }
+
+    form .likert {
+        list-style: none;
+        width: 100%;
+        margin: 0;
+        padding: 0 0 35px;
+        display: block;
+        border-bottom: 2px solid #efefef;
+    }
+
+        form .likert:last-of-type {
+            border-bottom: 0;
+        }
+
+        form .likert:before {
+            content: '';
+            position: relative;
+            top: 11px;
+            left: 9.5%;
+            display: block;
+            background-color: #efefef;
+            height: 4px;
+            width: 78%;
+        }
+
+        form .likert li {
+            display: inline-block;
+            width: 19%;
+            text-align: center;
+            vertical-align: top;
+        }
+
+            form .likert li input[type=radio] {
+                display: block;
+                position: relative;
+                top: 0;
+                left: 50%;
+                margin-left: -6px;
+            }
+
+            form .likert li label {
+                width: 100%;
+            }
+
+    form .buttons {
+        margin: 30px 0;
+        padding: 0 4.25%;
+        text-align: right
+    }
+
+        form .buttons button {
+            padding: 5px 10px;
+            background-color: #67ab49;
+            border: 0;
+            border-radius: 3px;
+        }
+
+        form .buttons .clear {
+            background-color: #e9e9e9;
+        }
+
+        form .buttons .submit {
+            background-color: #67ab49;
+        }
+
+        form .buttons .clear:hover {
+            background-color: #ccc;
+        }
+
+        form .buttons .submit:hover {
+            background-color: #14892c;
+        }
+</style>
+    </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<style>
+    html, body {
+        font-family: cursive;
+        font-size: 17px;
+        line-height: 1.5;
+    }
+
+    table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6;
+        column-rule-color: white;
+        border-color: white;
+    }
+
+    table td, .table th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid white;
+        border-color: white;
+    }
+
+    table {
+        border-color: white;
+    }
+</style>
+
+
+<div class="content mt-3 .progress">
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1 style="font-size:17px; color:dodgerblue; font-weight:bold; display:none">Fill Survey</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8" style="display:none">
+            <div class="page-header float-right">
+                <div class="page-title">
+                    <ol class="breadcrumb text-right">
+                        <li><a href="#">@Html.ActionLink("Dashboard", "PollsterIndex", "Home")</a></li>
+                        <li><a href="#">@Html.ActionLink("Create Survey", "Create", "Surveys")</a></li>
+                        <li><a href="#">@Html.ActionLink("All Surveys", "Index", "Surveys")</a></li>
+                        <li class="active">@Html.ActionLink("Design Survey", "DesignSurvey", "Surveys", new { @class = "active" })</li>
+
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+
+                <div class="card-header" style="background-color:palevioletred">
+                    <strong>Survey Title:</strong>&nbsp;&nbsp;@Html.Raw(ViewBag.SurveyName)
+
+                </div>
+                <div class="card-body card-block">
+                    <form class="form-horizontal" method="post" action="../SubmitResponse">
+                        <input type="hidden" name="surveyid" value="@Html.Raw(ViewBag.surveyid)" />
+
+                        @*<input type="text" id="input2-group3" name="question_Title" placeholder="Enter Question" class="form-control">*@
+                        <table width="800" height="410" border="0">
+
+                            @foreach (var question in Model.Questions)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <input type="hidden" id="@Html.DisplayFor(modelItem => question.questionId )" name="qId" value="@Html.DisplayFor(modelItem => question.questionId)" unchecked="">
+
+                                        <input type="hidden" id="@Html.DisplayFor(modelItem => question.question_Title)" name="qTitle" value="@Html.DisplayFor(modelItem => question.question_Title)" unchecked="">
+
+                                        @Html.DisplayFor(modelItem => question.question_Title)
+
+
+                                    </td>
+                                </tr>
+
+                                foreach (var ansOption in question.AnswerOptions)
+                                {
+
+                                    <tr>
+                                        <td>
+                                            @*Radio*@
+                                            @if (question.questionType == "myRadio")
+                                            {
+                                                if (ansOption.optionString != "default")
+                                                {
+                                                    <div class="custom-control custom-radio">
+                                                        <input style="width:20px" type="radio" name='@question.questionId' value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="selectRadiobtn(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)">
+                                                        <label for=@question.questionId>@Html.DisplayFor(modelItem => ansOption.optionString)</label>
+                                                    </div>
+                                                }
+                                            }
+
+                                            @*checkbox*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "chkbox")
+                                            {
+
+                                                if (@Html.DisplayFor(modelItem => ansOption.optionString).ToString() != "default")
+                                                {
+                                                    <input type="checkbox" id="question.questionId" name="qName" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeCheckbox(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" unchecked="" />
+                                                    <label for="@question.questionId">@Html.DisplayFor(modelItem => ansOption.optionString)</label>
+                                                    @*<div class="">
+
+                                                            <div class="">
+                                                                <input type="checkbox" class="" unchecked="" id=question.questionId name="sport" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeCheckbox(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)">
+                                                                <label class="" for=@question.questionId>@Html.DisplayFor(modelItem => ansOption.optionString)</label>
+                                                            </div>
+                                                        </div>*@
+                                                }
+                                            }
+
+                                            @*Dropdown*@
+
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "dropdown1")
+                                            {
+                                                if (question.questionType == "dropdown1")
+                                                {
+                                                    var val = @question.questionId + "dropdown";
+                                                    <select id=@val onChange="changeDropdown(@Html.Raw(ViewBag.surveyid),@question.questionId,@question.questionId+'dropdown')">
+                                                        <option>Choose an option</option>
+                                                        @foreach (var ansOption1 in question.AnswerOptions)
+                                                        {
+                                                            if (ansOption1.optionString != "default")
+                                                            {
+                                                                <option id=@ansOption.optionId>@ansOption1.optionString</option>
+                                                            }
+
+                                                        }
+                                                    </select>
+                                                    break;
+                                                }
+                                            }
+
+                                            @*Text area*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "textarea")
+                                            {
+                                                var vall = @question.questionId + "textarea";
+                                                <div class="form-group purple-border center">
+
+                                                    <textarea id=@vall class="form-control" rows="3" name="textarea" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onblur="fillopenquestion(@Html.Raw(ViewBag.surveyid),@question.questionId,@question.questionId+'textarea')"></textarea>
+
+                                                </div>
+                                            }
+
+
+
+
+
+                                            @*Likert*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "likert")
+                                            {
+                                                if (@Html.DisplayFor(modelItem => ansOption.optionString).ToString() != "default")
+                                                {
+                                                    <div class='wrap' id="likert">
+                                                        <div class="row" style="align-items:inherit">
+                                                            <div class="col-lg-2">
+                                                                <div>
+                                                                    <input type="radio" unchecked="" name='@question.questionId' value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="selectRadiobtn(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)">
+
+                                                                    <label class="form-control name_list" for=@question.questionId>@Html.DisplayFor(modelItem => ansOption.optionString)</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
+
+                                            @*Smiley*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "smileys")
+                                            {
+                                                <div id="smileys" class="center">
+                                                    <div>
+                                                        <img src="~/Images/Sad.png" style="width:120px;height:120px" />
+
+                                                        <input type="radio" value="sad" placeholder="option" unchecked="" id=question.questionId onclick="selectRadiobtn(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)">
+                                                        @*onclick="selectSmiley(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId" />*@
+                                                    </div>
+                                                    &nbsp;
+                                                    <div>
+                                                        <img src="~/Images/Neutral.png" style="width:120px;height:120px" />
+
+                                                        <input type="radio" value="neutral" placeholder="option" unchecked="" id=question.questionId onclick="selectSmiley(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId" />
+
+                                                    </div>
+                                                    &nbsp;
+                                                    <div>
+                                                        <img src="~/Images/happy.png" style="width:120px;height:120px" />
+
+                                                        <input type="radio" value="happy" name="optionString" placeholder="option" unchecked="" id=question.questionId onclick="selectSmiley(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            }
+
+                                            @*File upload*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "filechk")
+                                            {
+
+                                                <div class="file-upload" id="filechk">
+
+                                                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
+
+                                                    <div class="image-upload-wrap">
+                                                        <input class="file-upload-input" name="optionString" placeholder="option" type='file' onchange="readURL(this);" accept="image/*" />
+                                                        <div class="drag-text">
+                                                            <h3>Drag and drop a file or select add Image</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="file-upload-content">
+                                                        <img class="file-upload-image" src="#" alt="your image" />
+                                                        <div class="image-title-wrap">
+                                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                                            <button class="btn save hide">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            @*Thumb*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "thumb")
+                                            {
+                                                <div class="row center">
+                                                    <div class="rating-area" id="thumb">
+                                                        <div class="thumbs-up-circle align-center transition-fast">
+                                                            <span class="thumbs-up transition-fast">
+                                                                <i class="icon fa fa-thumbs-up thumb" onclick="changeThumb(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)">
+                                                                </i>
+                                                            </span>
+                                                        </div>
+                                                        &nbsp; &nbsp;
+                                                        <div class="thumbs-up-circle align-center transition-fast">
+                                                            <span class="thumbs-down transition-fast">
+                                                                <i class="icon fa fa-thumbs-down thumb" onclick="changeThumb(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)">
+                                                                </i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                            @*Date picker*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "datepicker")
+                                            {
+
+                                                var val = @question.questionId + "datepicker";
+                                                <div id="datepicker" class="centerd">
+
+                                                    <input type="date" placeholder="option" class="form-control name_list" id=@val onblur="chooseDate(@Html.Raw(ViewBag.surveyid),@question.questionId,  @question.questionId+'datepicker')">
+                                                </div>
+                                            }
+
+
+                                            @*Password*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "password")
+                                            {
+                                                var valuepassword = @question.questionId + "password";
+                                                <div class="panel panel-default center" id="password">
+                                                    <div class="panel-body">
+                                                        <div class="form-horizontal">
+
+                                                            <div class="form-group">
+                                                                <label class="col-md-3 control-label">Password</label>
+
+                                                                <div class="col-md-9">
+
+                                                                    <input id=@valuepassword type="password" @*class="form-control"*@ placeholder="Enter Password" name="password" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onblur="selectPassword(@Html.Raw(ViewBag.surveyid),@question.questionId,@question.questionId+'password')">
+                                                                    <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
+
+                                            @*Email*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "email")
+                                            {
+                                                var valll = @question.questionId + "email";
+                                                <div id="email">
+
+                                                    <input id=@valll type="email" name="emailinput" placeholder="Enter Your email" onblur="selectEmail(@Html.Raw(ViewBag.surveyid),@question.questionId,@question.questionId+'email')">
+                                                    <span class="message success">Email is Valid</span>
+                                                    <span class="message error">Email is Invalid!</span>
+                                                </div>
+                                            }
+
+
+
+
+
+                                            @*textquestion*@
+
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "textquestion")
+                                            {
+                                                var textval = @question.questionId + "textquestion";
+                                                <div id="textquestion" class="form-group">
+                                                    <input id="@textval" type="text" name="optionString" placeholder="Enter Answer" class="form-control name_list" onchange="changeCheckbox(@Html.Raw(ViewBag.surveyid),@question.questionId,@question.questionId+'textquestion')">
+                                                </div>
+                                            }
+
+
+
+
+
+
+
+                                            <style>
+
+
+
+
+                                                .star-rating {
+                                                    direction: rtl;
+                                                    display: inline-block;
+                                                    padding: 30px;
+                                                }
+
+                                                    .star-rating input[type=radio] {
+                                                        display: none;
+                                                    }
+
+                                                    .star-rating label {
+                                                        color: #bbb;
+                                                        font-size: 40px;
+                                                        padding: 0;
+                                                        cursor: pointer;
+                                                        -webkit-transition: all .3s ease-in-out;
+                                                        transition: all .3s ease-in-out;
+                                                    }
+
+                                                        .star-rating label:hover,
+                                                        .star-rating label:hover ~ label,
+                                                        .star-rating input[type=radio]:checked ~ label {
+                                                            color: #f2b600;
+                                                        }
+
+                                                .div {
+                                                    height: 100px;
+                                                    width: 500px;
+                                                    background-color: hotpink;
+                                                }
+                                            </style>
+
+
+                                            @*Star rating*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "star")
+                                            {
+                                                var val1 = @question.questionId + "star";
+                                                <div class="stars">
+                                                    <div>
+                                                        <input class="star star-5" id="star-5" type="radio" name="qNamee" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeStar(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" />
+                                                        <label class="star star-5" for="@question.questionId" title="5 stars"></label>
+                                                        <input class="star star-4" id="star-4" type="radio" name="qNamee" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeStar(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" />
+                                                        <label class="star star-4" for=@question.questionId title="4 stars"></label>
+                                                        <input class="star star-3" id="star-3" type="radio" name="qNamee" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeStar(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" />
+                                                        <label class="star star-3" for=@question.questionId title="3 stars"></label>
+                                                        <input class="star star-2" id="star-2" type="radio" name="qNamee" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeStar(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" />
+                                                        <label class="star star-2" for=@question.questionId title="2 stars"></label>
+                                                        <input class="star star-1" id="star-1" type="radio" name="qNamee" value="@Html.DisplayFor(modelItem => ansOption.optionString)" onclick="changeStar(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" />
+                                                        <label class="star star-1" for=@question.questionId title="1 stars"></label>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            }
+
+
+
+
+                                            @*Slider distance*@
+                                            @if (@Html.DisplayFor(modelItem => question.questionType).ToString() == "slider-distance")
+                                            {
+                                                var slideval = @question.questionId + "slider-distance";
+                                                <div slider id="slider-distance">
+                                                    <div>
+                                                        
+                                                        <div inverse-left style="width:70%;"></div>
+                                                        <div inverse-right style="width:70%;"></div>
+                                                        <div range style="left:30%;right:40%;"></div>
+                                                        <span thumb style="left:30%;"></span>
+                                                        <span thumb style="left:60%;"></span>
+                                                        <div sign style="left:30%;">
+                                                            <span id="value">30</span>
+                                                        </div>
+                                                        <div sign style="left:60%;">
+                                                            <span id="value">60</span>
+                                                        </div>
+                                                    </div>
+                                                    <input id="@slideval" type="range" tabindex="0" value="30" max="100" min="0" step="1" oninput="
+                                                               this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+                                                               var value=(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.value)-(100/(parseInt(this.max)-parseInt(this.min)))*parseInt(this.min);
+                                                               var children=this.parentNode.childNodes[1].childNodes;
+                                                               children[1].style.width=value+'%';
+                                                               children[5].style.left=value+'%';
+                                                               children[7].style.left=value+'%';children[11].style.left =value+'%';
+                                                               children[11].childNodes[1].innerHTML=this.value;" ondrag="DragSlider(@Html.Raw(ViewBag.surveyid),@question.questionId,'#'+@question.questionId)" />
+
+
+                                                </div>
+                                            }
+
+
+
+
+
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+
+
+                        <div class="container-contact100-form-btn">
+                            <button class="contact100-form-btn" href="#myModal" data-toggle="modal" onclick="ModalFunc()">
+                                <span>
+                                    Visit our website: @Html.ActionLink("Ask Survey", "Index", "Home", new { area = "" }, new { @style = "color:white" })
+                                    <i class="zmdi zmdi-arrow-right m-l-8"></i>
+                                </span>
+                            </button>
+
+                            <div id="myModal" class="modal fade">
+                                <div class="modal-dialog modal-confirm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="icon-box">
+                                                <i class="material-icons">&#xE876;</i>
+                                            </div>
+                                            <h4 class="modal-title">Awesome!</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p class="text-center">Response submitted</p>
+                                        </div>
+                                        @*<div class="modal-footer">
+                        <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                    </div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            @*<div id="js-gdpr-consent-banner" class="p16 bg-black-700 ff-sans fc-white ps-fixed b0 l0 r0 z-banner" role="banner" aria-hidden="false">
+            <div class="wmx8 mx-auto grid jc-center" role="alertdialog" aria-describedby="notice-message">
+                <div class="grid--cell mr12" aria-label="notice-message">
+                    <p class="mb0 lh-lg">
+                        By using our site, you acknowledge that you have read and understand our <a class="s-link s-link__inherit td-underline fc-white" target="_blank" href="https://stackoverflow.com/legal/cookie-policy">Cookie Policy</a>, <a class="s-link s-link__inherit td-underline fc-white" target="_blank" href="https://stackoverflow.com/legal/privacy-policy">Privacy Policy</a>, and our <a class="s-link s-link__inherit td-underline fc-white" target="_blank" href="https://stackoverflow.com/legal/terms-of-service/public">Terms of Service</a>.
+                    </p>
+                </div>
+                <a class="grid--cell fc-white js-notice-close" aria-label="notice-dismiss">
+                    <svg aria-hidden="true" class="svg-icon m0 iconClear" width="18" height="18" viewBox="0 0 18 18"><path d="M15 4.41L13.59 3 9 7.59 4.41 3 3 4.41 7.59 9 3 13.59 4.41 15 9 10.41 13.59 15 15 13.59 10.41 9 15 4.41z"></path></svg>
+                </a>
+            </div>
+        </div>*@
+                        </div>
+                        <br />
+                        <br />
+
+                        <div style="text-align:center">
+                            <b>Powered by</b>
+                            <br />
+                            <br />
+                            <img style="width:200px; height:50px" src="~/Images/unnamed (1).png" />
+                            <br />
+                            <br />
+                            <p>Want to design your own? Visit <a href="#" style="color:mediumblue">Ask Survey </a></p>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        //$("#slide").hide();
+        //$("#choice").hide();
+        //$("#likert").hide();
+        //$("#textarea").hide();
+        //$("#chkbox").hide();
+        //$("#my").hide();
+        //$("#smileys").hide();
+        //$("#myRadio").hide();
+        //$("#filechk").hide();
+        //$("#datepicker").hide();
+        //$("#dropdown1").hide();
+        //$("#thumb").hide();
+        //$("#email").hide();
+        //$("#slider-distance").hide();
+        //$("#password").hide();
+        //$("#toggle").hide();
+    });
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        //document.getElementById("myDropdown").classList.toggle("show");
+
+        $('#myDropdown').show();
+        return false;
+
+        $("multiple").click(function () {
+            $("#slide").load("~/Scripts/sliderRange.html #p1");
+        });
+
+    }
+
+
+
+    // Close the dropdown if the user clicks outside of it
+    //window.onclick = function (event) {
+    //     if (!event.target.matches('.dropbtn')) {
+    //         var dropdowns = document.getElementsByClassName("dropdown-content");
+    //         var i;
+    //         for (i = 0; i < dropdowns.length; i++) {
+    //             var openDropdown = dropdowns[i];
+    //             if (openDropdown.classList.contains('show')) {
+    //                 openDropdown.classList.remove('show');
+    //             }
+    //         }
+    //     }
+    // }
+
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+</script>
+<script>
+    $('input:radio').click(function () {
+        var enthusiasm = $('input:radio[name=enthusiasm]:checked').val();
+        var knowledgeable = $('input:radio[name=knowledgeable]:checked').val();
+        var timeliness = $('input:radio[name=timeliness]:checked').val();
+        var helpful = $('input:radio[name=helpful]:checked').val();
+
+        //todo get average column of answered columns
+        //highlight average column
+
+        // provide plus minus arrows next to each answer to indicate deviation from average
+    });
+</script>
+<script>
+    var slider = document.getElementById("my");
+    output.innerHTML = slider.value;
+    slider.oninput = function () {
+        output.innerHTML = this.value;
+    }
+</script>
+
+<script>
+    const INPUTS = document.querySelectorAll('#smileys input');
+
+    function updateValue(e) {
+        document.querySelector('#result').innerHTML = e.target.value;
+    }
+
+    INPUTS.forEach(el => el.addEventListener('click', (e) => updateValue(e)));
+
+</script>
+
+<script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.image-title').html(input.files[0].name);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function () {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function () {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+    save.addEventListener('click', (e) => {
+        e.preventDefault();
+        // get result to data uri
+        let imgSrc = cropper.getCroppedCanvas({
+            width: img_w.value // input value
+        }).toDataURL();
+        // remove hide class of img
+        cropped.classList.remove('hide');
+        img_result.classList.remove('hide');
+        // show image cropped
+        cropped.src = imgSrc;
+        dwn.classList.remove('hide');
+        dwn.download = 'imagename.png';
+        dwn.setAttribute('href', imgSrc);
+    });
+
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#add').click(function () {
+            i++;
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_name').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_name')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    //if (document.getElementById("thumb")) {
+    //    if (document.getElementById("like")) {
+
+    function youFunction() {
+        document.getElementById("like").innerHTML = "YOU LIKED!";
+    }
+
+
+    function meFunction() {
+        document.getElementById("dislike").innerHTML = "YOU DISLIKED!";
+
+    }
+
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#addtext').click(function () {
+            i++;
+            $('#dynamic_field1').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_field').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_field')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#addtext1').click(function () {
+            i++;
+            $('#dynamic_field2').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_field1').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_field1')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        var j = 1;
+        $('#addtext2').click(function () {
+            i++;
+            $('#dynamic_field3').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter otion" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#col' + button_id + '').remove();
+        });
+
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_field2').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_field2')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+
+    $(document).ready(function () {
+        var i = 1;
+        $('#add_fieldtoogle').click(function () {
+            i++;
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input type="text" name="optionString" placeholder="Enter your Name" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+        });
+        $('#submit').click(function () {
+            $.ajax({
+                url: "name.php",
+                method: "POST",
+                data: $('#add_name').serialize(),
+                success: function (data) {
+                    alert(data);
+                    $('#add_name')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
+<script>
+    var rangeSlider = function () {
+        var slider = $('.range-slider'),
+            range = $('.range-slider__range'),
+            value = $('.range-slider__value');
+
+        slider.each(function () {
+
+            value.each(function () {
+                var value = $(this).prev().attr('value');
+                $(this).html(value);
+            });
+
+            range.on('input', function () {
+                $(this).next(value).html(this.value);
+            });
+        });
+    };
+
+    rangeSlider();
+
+</script>
+
+<script>
+    $(function () {
+
+
+        var regExp = /^([\w\.\+]{1,})([^\W])([\w]{1,})(\.[\w]{1,})+$/;
+
+        $('[type="email"]').on('keyup', function () {
+            $('.message').hide();
+            regExp.test($(this).val()) ? $('.message.error').show() : $('.message.success').show();
+        });
+
+    });
+</script>
+
+
+
+
+
+
+<script>
+    $(".toggle-password").click(function () {
+
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+
+
+
+
+

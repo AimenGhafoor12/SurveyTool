@@ -1,0 +1,66 @@
+﻿
+@model IEnumerable<UserManagement.Models.Feedback>
+@{
+    ViewBag.Title = "GetallPollster";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+<html>
+<body>
+    <style>
+        html, body {
+            font-family: cursive;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+    </style>
+
+    <div class="col">
+        <div class="col-lg-9 offset-2" style="align-items:center">
+            <div style="background-color:white">
+                <br />
+                <br />
+                <h2 style="color:darkcyan">Feedbacks </h2>
+                <div class="table table-hover v-middle">
+
+                    
+                        <table class="table" style="float:left; margin-right:10px; outline: 14px;">
+                            <thead>
+                                <tr class="bg-light">
+                                    <th style="color: mediumorchid">
+                                        Feedback
+                                    </th>
+                                    <th style="color: mediumorchid">
+                                        rating
+                                    </th>
+
+
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tbody>
+                                    <tr>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.feedbackString)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.rating)
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+
+                        </table>
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+
+

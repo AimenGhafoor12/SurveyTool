@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AnswerOption">
+    <Key>
+      <PropertyRef Name="optionId" />
+    </Key>
+    <Property Name="optionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="optionString" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="questionId" Type="Int32" />
+    <NavigationProperty Name="Question" Relationship="Self.FK_AnswerOption_ToTable" FromRole="AnswerOption" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="feedbackId" />
+    </Key>
+    <Property Name="feedbackId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="feedbackString" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="rating" Type="Int32" />
+    <Property Name="userId" Type="Int32" />
+    <Property Name="responsderId" Type="Int32" />
+    <NavigationProperty Name="Responder" Relationship="Self.FK_Feedback_ToTable" FromRole="Feedback" ToRole="Responder" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Feedback_ToTable_1" FromRole="Feedback" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="questionId" />
+    </Key>
+    <Property Name="questionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="question_Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="surveyid" Type="Int32" />
+    <Property Name="questionType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="AnswerOptions" Relationship="Self.FK_AnswerOption_ToTable" FromRole="Question" ToRole="AnswerOption" />
+    <NavigationProperty Name="Survey" Relationship="Self.FK_Question_ToTable" FromRole="Question" ToRole="Survey" />
+  </EntityType>
+  <EntityType Name="Responder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="responder1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_ToTable" FromRole="Responder" ToRole="Feedback" />
+    <NavigationProperty Name="Responses" Relationship="Self.FK_Response_ToTable" FromRole="Responder" ToRole="Response" />
+  </EntityType>
+  <EntityType Name="Response">
+    <Key>
+      <PropertyRef Name="responseId" />
+    </Key>
+    <Property Name="questionId" Type="Int32" Nullable="false" />
+    <Property Name="optionId" Type="Int32" Nullable="false" />
+    <Property Name="responseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="responderId" Type="Int32" />
+    <NavigationProperty Name="Responder" Relationship="Self.FK_Response_ToTable" FromRole="Response" ToRole="Responder" />
+  </EntityType>
+  <EntityType Name="Survey">
+    <Key>
+      <PropertyRef Name="SurveyId" />
+    </Key>
+    <Property Name="SurveyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="surveyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="userId" Type="Int32" />
+    <Property Name="startData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="endDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Questions" Relationship="Self.FK_Question_ToTable" FromRole="Survey" ToRole="Question" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Survey_ToTable" FromRole="Survey" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="confirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Feedbacks" Relationship="Self.FK_Feedback_ToTable_1" FromRole="User" ToRole="Feedback" />
+    <NavigationProperty Name="Surveys" Relationship="Self.FK_Survey_ToTable" FromRole="User" ToRole="Survey" />
+  </EntityType>
+  <Association Name="FK_AnswerOption_ToTable">
+    <End Role="Question" Type="Self.Question" Multiplicity="0..1" />
+    <End Role="AnswerOption" Type="Self.AnswerOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="questionId" />
+      </Principal>
+      <Dependent Role="AnswerOption">
+        <PropertyRef Name="questionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Feedback_ToTable">
+    <End Role="Responder" Type="Self.Responder" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Responder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="responsderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Feedback_ToTable_1">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_ToTable">
+    <End Role="Survey" Type="Self.Survey" Multiplicity="0..1" />
+    <End Role="Question" Type="Self.Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Survey">
+        <PropertyRef Name="SurveyId" />
+      </Principal>
+      <Dependent Role="Question">
+        <PropertyRef Name="surveyid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Response_ToTable">
+    <End Role="Responder" Type="Self.Responder" Multiplicity="0..1" />
+    <End Role="Response" Type="Self.Response" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Responder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Response">
+        <PropertyRef Name="responderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Survey_ToTable">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Survey" Type="Self.Survey" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Survey">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AnswerOptions" EntityType="Self.AnswerOption" />
+    <EntitySet Name="Feedbacks" EntityType="Self.Feedback" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="Responders" EntityType="Self.Responder" />
+    <EntitySet Name="Responses" EntityType="Self.Response" />
+    <EntitySet Name="Surveys" EntityType="Self.Survey" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_AnswerOption_ToTable" Association="Self.FK_AnswerOption_ToTable">
+      <End Role="Question" EntitySet="Questions" />
+      <End Role="AnswerOption" EntitySet="AnswerOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Feedback_ToTable" Association="Self.FK_Feedback_ToTable">
+      <End Role="Responder" EntitySet="Responders" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Feedback_ToTable_1" Association="Self.FK_Feedback_ToTable_1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_ToTable" Association="Self.FK_Question_ToTable">
+      <End Role="Survey" EntitySet="Surveys" />
+      <End Role="Question" EntitySet="Questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Response_ToTable" Association="Self.FK_Response_ToTable">
+      <End Role="Responder" EntitySet="Responders" />
+      <End Role="Response" EntitySet="Responses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Survey_ToTable" Association="Self.FK_Survey_ToTable">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Survey" EntitySet="Surveys" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

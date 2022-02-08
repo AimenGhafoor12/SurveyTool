@@ -1,0 +1,42 @@
+﻿@model UserManagement.Models.Question
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.question_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.question_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.questionType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.questionType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Survey.surveyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Survey.surveyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.questionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

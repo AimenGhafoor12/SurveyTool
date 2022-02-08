@@ -1,0 +1,45 @@
+﻿@model IEnumerable<UserManagement.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.question_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.questionType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Survey.surveyName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.question_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.questionType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Survey.surveyName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.questionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.questionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.questionId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,237 @@
+﻿@model UserManagement.Models.User
+@{  
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pollster Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="~/LoginAssets/images/icons/favicon.ico" />
+    <link href="~/LoginAssets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/LoginAssets/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/LoginAssets/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" rel="stylesheet" />
+    <link href="~/LoginAssets/vendor/animate/animate.css" rel="stylesheet" />
+    <link href="~/LoginAssets/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" />
+    <link href="~/LoginAssets/vendor/animsition/css/animsition.min.css" rel="stylesheet" />
+    <link href="~/LoginAssets/vendor/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/LoginAssets/vendor/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/LoginAssets/css/main.css" rel="stylesheet" />
+    <link href="~/LoginAssets/css/util.css" rel="stylesheet" />
+
+    @*For modal*@
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+</head>
+<body>
+
+    @*For modal*@
+    <style type="text/css">
+        body {
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .modal-confirm {
+            color: #636363;
+            width: 325px;
+        }
+
+            .modal-confirm .modal-content {
+                padding: 20px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            .modal-confirm .modal-header {
+                border-bottom: none;
+                position: relative;
+            }
+
+            .modal-confirm h4 {
+                text-align: center;
+                font-size: 26px;
+                margin: 30px 0 -15px;
+            }
+
+            .modal-confirm .form-control, .modal-confirm .btn {
+                min-height: 40px;
+                border-radius: 3px;
+            }
+
+            .modal-confirm .close {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+            }
+
+            .modal-confirm .modal-footer {
+                border: none;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 13px;
+            }
+
+            .modal-confirm .icon-box {
+                color: #fff;
+                position: absolute;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                top: -70px;
+                width: 95px;
+                height: 95px;
+                border-radius: 50%;
+                z-index: 9;
+                background: #82ce34;
+                padding: 15px;
+                text-align: center;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+            }
+
+                .modal-confirm .icon-box i {
+                    font-size: 58px;
+                    position: relative;
+                    top: 3px;
+                }
+
+            .modal-confirm.modal-dialog {
+                margin-top: 80px;
+            }
+
+            .modal-confirm .btn {
+                color: #fff;
+                border-radius: 4px;
+                background: #82ce34;
+                text-decoration: none;
+                transition: all 0.4s;
+                line-height: normal;
+                border: none;
+            }
+
+                .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+                    background: #6fb32b;
+                    outline: none;
+                }
+
+        .trigger-btn {
+            display: inline-block;
+            margin: 100px auto;
+        }
+    </style>
+
+
+    <style>
+        html, body {
+            font-family: cursive;
+        }
+    </style>
+    <div class="limiter" style="font-family: cursive;">
+        <div class="container-login100" style="background-image: url('../../Images/pic.jpg');">
+            <div class="wrap-login100 p-t-30 p-b-50">
+
+                <span class="login100-form-title p-b-41">
+                    <img src="~/Images/unnamed (1).png" />
+                </span>
+                @*<div class="login-logo">
+            <a><img src="~/Images/logooooo1.png" alt="Logo" /></a>
+        </div>*@
+                <form action="" method="post" class="login100-form validate-form p-b-33 p-t-5">
+                    <div class="wrap-input100 validate-input" data-validate="Enter username">
+                        <input class="input100" id="email" type="email" name="username" placeholder="email">
+                        @Html.ValidationMessageFor(Model => Model.Id)
+                        <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input class="input100" id="pass" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    </div>
+                 
+                    <div>
+
+                        @*@if (pass == Model.password)
+                {
+
+                }*@
+                    </div>
+
+                    <div class="container-login100-form-btn m-t-32">
+                        <button class="login100-form-btn" id="button" href="#myModal" type="submit" data-toggle="modal" onclick="ModalFunc()">
+                            Login
+                        </button>
+
+                    </div>
+                    <br />
+                    <p style="font:20px"> <b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Don't have an Account? <a href="#" style="color:mediumblue">@Html.ActionLink("Sign Up", "Register", "Users", new { area = "" }, new { @style = "color:mediumblue" }) </a></b> </p>
+
+                    <div id="myModal" class="modal fade">
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <div class="icon-box">
+                                        <i class="material-icons">&#xE876;</i>
+                                    </div>
+                                    <h4 class="modal-title">Awesome!</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-center">Login Successfull</p>
+                                </div>
+                                @*<div class="modal-footer">
+                            <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+                        </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+
+
+    <script>
+        
+            function ModalFunc() {
+                if ($('#email').val() == "") {
+                    alert('Please complete the field');
+                    ($('#myModal').hide);
+                }
+                if ($('#pass').val() == "") {
+                    alert('Please complete the field');
+                    ($('#myModal').hide);
+                }
+                if (($('#email').val().length >= 1) && ($('#pass').val().length >= 1)) {
+                    ($('#myModal').show);
+                }
+            };
+        
+    </script>
+
+    <script src="~/LoginAssets/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="~/LoginAssets/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/LoginAssets/vendor/bootstrap/js/popper.js"></script>
+    <script src="~/LoginAssets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/LoginAssets/vendor/select2/select2.min.js"></script>
+    <script src="~/LoginAssets/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/LoginAssets/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="~/LoginAssets/vendor/countdowntime/countdowntime.js"></script>
+    <script src="~/LoginAssets/js/main.js"></script>
+</body>
+</html>
+
+
+

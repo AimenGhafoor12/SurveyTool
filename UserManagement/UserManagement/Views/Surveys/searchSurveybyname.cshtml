@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UserManagement.Models.Survey>
+@{
+    ViewBag.Title = "searchPollsterbyname";
+    Layout = "~/Views/Shared/_NewAdminLayout.cshtml";
+}
+
+<h2>searchPollsterbyname</h2>
+
+<div class="table-responsive">
+    <table class="table table-hover v-middle">
+        <tr class="bg-light">
+            <th style="color: mediumorchid">
+                Survey Name
+            </th>
+            <th style="color: mediumorchid">
+                Description
+            </th>
+            <th style="color: mediumorchid">
+                Start Date
+            </th>
+            <th style="color: mediumorchid">
+                End Date
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.surveyName)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.startData)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.endDate)
+                </td>
+            </tr>
+        }
+
+
+    </table>
+</div>
